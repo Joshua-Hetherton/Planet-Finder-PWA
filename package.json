@@ -1,0 +1,28 @@
+{
+  "name": "planet-finder-pwa",
+  "version": "1.0.0",
+  "description": "A Progressive Web App (PWA) that helps users find information about the planets, as well as their location in the Solar System. This app provides an easy-to-use interface.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "set DEBUG=app & node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joshua-Hetherton/Planet-Finder-PWA.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Joshua-Hetherton/Planet-Finder-PWA/issues"
+  },
+  "homepage": "https://github.com/Joshua-Hetherton/Planet-Finder-PWA#readme",
+  "dependencies": {
+    "debug": "^4.4.3",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "morgan": "^1.10.1"
+  }
+}
