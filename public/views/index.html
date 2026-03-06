@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Planet Finder PWA</title>
+        <link rel="stylesheet" href="../css/main.css">
+    </head>
+    <body>
+                
+        <!-- Header -->
+        <header>
+
+        </header>
+
+        <!-- Navigation Layout -->
+        <div class="Navigation">
+
+        </div>
+        <div class="Button-Images">
+            <!-- Displays Images which can be clicked, allowing for a nicer User Interface6-->
+            <input type="image" src="../images/planets/Marine_10_Mercury.jpg" name="Moon" class="btTxt submit" id="Button1" />
+        </div>
+        <script>
+            window.addEventListener("DOMContentLoaded", () => {
+                const img = document.getElementById("Button1");
+
+                img.addEventListener("click", () => {
+                    img.src = "../images/planets/Earth_Moon.jpg";
+                });
+            });
+        </script>
+
+
+
+    </body>
+</html>
