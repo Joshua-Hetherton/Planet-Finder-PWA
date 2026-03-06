@@ -1,0 +1,21 @@
+body {
+    font-family: 'Segoe UI';
+}
+
+h1, h2, h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5em;
+}
+
+#Button1:hover {
+    opacity: 0.1;
+    transition: opacity 0.3s;
+}
+.Button-Images input[type="image"] {
+    width: 900px;      /* your chosen display width */
+    height: 500px;     /* your chosen display height */
+    object-fit: cover; /* or 'contain' depending on behaviour you want */
+    border-radius: 8px;
+}
+
+.Button-Images
