@@ -1,10 +1,21 @@
 body {
     font-family: 'Segoe UI';
+    margin: 0;
+    padding: 0;
+    
 }
 
 h1, h2, h3 {
     color: var(--primary-color);
     margin-bottom: 0.5em;
+}
+
+.navigation-bar {
+    background-color: rgba(43, 48, 120, 0.902);;
+    width: 100%;
+    padding: 15px 0;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
+
 }
 
 .button-images {
