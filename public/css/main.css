@@ -25,7 +25,6 @@ h1, h2, h3 {
     overflow: hidden;
     justify-content: center;
     flex-wrap: wrap;
-
     gap:0;
     background: #000000;
 }
@@ -33,30 +32,53 @@ h1, h2, h3 {
     overflow: hidden;
     display: inline-block;
     position: relative;
-
     width:100%;
     aspect-ratio: 16/9;
     background:#000000;
 
 }
-.wrap-image input[type="image"]:hover, .wrap-image:hover img {
-    opacity: 10%;
-    
-    transform: scale(1.05);
 
-    
-}
 .wrap-image input[type="image"], .wrap-image img {
     width:100%;
     height:100%;
-
     object-fit: contain;
-
     border-radius: 3px;
     display: block; 
-
     transition: transform 0.3s ease, opacity 0.3s ease
 }
+
+.wrap-image input[type="image"]:hover, .wrap-image:hover img {
+    opacity: 90%;
+    transform: scale(1.05);
+    
+}
+
+/* An Intermediary between the image and setting the RGBA value
+Setting the RGBA value directly in the image can make the image appear to have pixelated boxes around it.
+This acts as a layer between the image and RGBA value.
+Currently, there is no way to set the Opacity Colour of the image in CSS
+*/
+.wrap-image::after {
+    content: "";
+    position:absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background:rgba(255, 255, 255, 0);
+    pointer-events: none;
+    transition: background 0.3s ease;
+    
+    /* Sets the heirachy of whats displayed.
+    In this case it is being put behind*/
+    z-index: 1;
+}
+
+.wrap-image:hover::after {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+
 
 @media (max-width:1080px){
     
