@@ -15,8 +15,8 @@ const planet_router=require("./public/routes/planet_router");
 const calendar_router=require("./public/routes/calendar_router");
 
 app.use("/", home_router);
-app.use("/", planet_router);
-app.use("/", calendar_router);
+app.use("/planet", planet_router);
+app.use("/calendar", calendar_router);
 app.use(express.static(path.join(__dirname, "public")))
 
 

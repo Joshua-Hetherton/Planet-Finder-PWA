@@ -9,7 +9,7 @@ const router=Router()
 
 router.get("/", (req,res)=>{
     debug("Serving Up Home page");
-    res.sendFile(path.join(__dirname, "../views","calendar.html"));
+    res.sendFile(path.join(__dirname,".." ,".." , "views", "calendar.html"));
 })
 
 module.exports=router;
