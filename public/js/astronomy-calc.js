@@ -46,6 +46,16 @@ function getPlanetPositionTime(latitude, longitude, date, planet_name) {
    //Finding culmination time, when it will be at its highest point in the sky (when the hour angle is 0)
    const culmination_time= Astronomy.SearchHourAngle(body, observer,hourAngle=0, datestart=date);
 
+   return {
+    planet: planet_name,
+    date: date.toISOString(),
+    rise_time: rise_time.toISOString(),
+    set_time: set_time.toISOString(),
+    transit_time: transit_time.toISOString(),
+    culmination_time: culmination_time.toISOString()
+
+   }
+
 }
 
 /*
@@ -64,13 +74,13 @@ function moonPhase(date) {
     switch (moon_phase_number)
     {
         case 0:
-            return"New Moon";
+            return "New Moon";
         case 90:
             return"First Quarter";
         case 180:
             return"Full Moon";
         case 270:
-            return"Third Quarter";
+            return "Third Quarter";
     }
 }
 
@@ -83,5 +93,11 @@ function findNextEclipse(date) {
     for (let i=0; i<5; i++) {
         eclipses_date.push(Astronomy.NextLunarEclipse(eclipses_date[i]));
     }
+
+    return {
+        eclipses: eclipses_date.map(eclipse => eclipse.toISOString())
+    }
 }
+
+export {getPlanetPosition, getPlanetPositionTime, getVisiblePlanets, moonPhase, findNextEclipse};
 
