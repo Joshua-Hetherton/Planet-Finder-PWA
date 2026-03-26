@@ -66,11 +66,22 @@ function moonPhase(date) {
         case 0:
             return"New Moon";
         case 90:
-            return"First Quarter":
+            return"First Quarter";
         case 180:
             return"Full Moon";
         case 270:
             return"Third Quarter";
+    }
+}
+
+/*
+Finds the next 5 lunar eclipses from a given date
+*/
+function findNextEclipse(date) {
+    eclipses_date=[];
+    eclipses_date.push(Astronomy.SearchLunarEclipse(date));
+    for (let i=0; i<5; i++) {
+        eclipses_date.push(Astronomy.NextLunarEclipse(eclipses_date[i]));
     }
 }
 
