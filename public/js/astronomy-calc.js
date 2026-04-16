@@ -1,14 +1,14 @@
 import * as Astronomy from 'astronomy-engine';
 
 const planet_names= {
-    'Mercury': Astronomy.Body.Mercury,
-    'Venus': Astronomy.Body.Venus,
-    'Earth': Astronomy.Body.Earth,
+    'Mercury' : Astronomy.Body.Mercury,
+    'Venus': Astronomy.Body.Venus ,
+    'Earth':  Astronomy.Body.Earth,
     'Mars': Astronomy.Body.Mars,
     'Jupiter': Astronomy.Body.Jupiter,
     'Saturn': Astronomy.Body.Saturn,
     'Uranus': Astronomy.Body.Uranus,
-    'Neptune': Astronomy.Body.Neptune,
+    'Neptune' : Astronomy.Body.Neptune ,
 }
 /*
 Gets the current position of the planet, when given a time and location. 
@@ -21,6 +21,25 @@ function getPlanetPosition(latitude, longitude, date, planet_name) {
     const observer= new Astronomy.Observer( latitude, longitude, height=0);
 
     const body= bodyMap[planet_name.tolowerCase()];
+
+    const equator=Astronomy.Equator(body, date, observer, true, true);
+    const Horizon=Astronomy.Horizon(date, observer, equator.ra, equator.dec, 'normal');
+
+    //Geo vector calculates position of selected planet relative to earths center, accounting for Aberration(either true or false)
+    const position_Vecotr= Astronomy.GeoVector(body, date, true);
+
+    //Calculates distance in KM then coverts to AU (Astronomical Units)
+    const current_position=Math.sqrt(position_Vecotr.x**2 + position_Vecotr.y**2 + position_Vecotr.z**2)*Astronomy.KM_PER_AU;
+
+
+    return {
+        planet_name: planet_name,
+        date: date.toISOString(),
+        altitude: Horizon.altitude,
+        azimuth: Horizon.azimuth,
+        AU_distance: current_position,
+        is_visible: Horizon.altitude > 0
+    }
 
 }
 
@@ -67,20 +86,34 @@ function getVisiblePlanets(latitude, longitude, date) {
     const observer= new Astronomy.Observer( latitude, longitude, height=0);
 
     const body= bodyMap[planet_name.tolowerCase()];
+
+    const visible_planets= [];
+
+    for (planet in planet_names) {
+        const position= getPlanetPosition(latitude, longitude, date, planet)
+        if (position.is_visible) {
+            visible_planets.push(position);
+        }
+
+    }
+    return{
+        date:date.toISOString(),
+        visible_planets: visible_planets,
+    }
 }
 
 function moonPhase(date) {
     const moon_phase_number= Astronomy.MoonPhase(date);
     switch (moon_phase_number)
     {
-        case 0:
+        case moon_phase_number<45 || moon_phase_number>=310:
             return "New Moon";
-        case 90:
+        case  moon_phase_number>=45 && moon_phase_number<135:
             return"First Quarter";
-        case 180:
+        case  moon_phase_number>=135 && moon_phase_number<225:
             return"Full Moon";
-        case 270:
-            return "Third Quarter";
+
+        return "Third Quarter";
     }
 }
 
@@ -93,9 +126,10 @@ function findNextEclipse(date) {
     for (let i=0; i<5; i++) {
         eclipses_date.push(Astronomy.NextLunarEclipse(eclipses_date[i]));
     }
-
+    //Add type of eclipse on eclipses
     return {
-        eclipses: eclipses_date.map(eclipse => eclipse.toISOString())
+        eclipses: eclipses_date.map(eclipse => ({ date: eclipse.toISOString(),
+             type: eclipses })),
     }
 }
 
