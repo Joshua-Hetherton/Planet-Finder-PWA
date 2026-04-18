@@ -1,6 +1,15 @@
 # Planet Finder PWA
 
 Table of Contents
+- [Overview](#overview)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [How to Navigate the App](#how-to-navigate-the-app)
+- [Features](#features)
+
+Overview
+-------------
+
 
 Prerequisites
 -------------
@@ -32,8 +41,3 @@ Features
 - Ability to select a planet and view any information about it.
 - Ability to input a date, time, and location to find out which planets are visible in the sky at that moment.
 - A Responsive design to work with both Desktop and Mobile devices
-
-
-Overview
--------------
-- 
