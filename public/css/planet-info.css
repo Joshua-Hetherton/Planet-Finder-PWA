@@ -1,0 +1,89 @@
+.user-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background-color: rgba(28, 28, 34, 0.8);
+    padding: 15px;
+    margin: 10px;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.user-inputs {
+    background-color: rgb(36, 36, 44);
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 3px;
+
+}
+.input-row{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    justify-content: center;
+
+}
+.button-row-input {
+    display:flex;
+    flex-direction: row;
+    gap:10px;
+    justify-content: center;
+}
+#date-input, #time-input, #lat-input, #long-input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 150px;
+    background-color: rgb(36, 36, 44);
+    color: rgb(220, 220, 230);
+}
+
+button {
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 150px;
+    background-color: rgb(70, 85, 125);
+    color: rgb(230, 230, 240);
+    border-radius: 10px;
+}
+button:hover{
+    background-color: rgb(85, 100, 145);
+    cursor: pointer;
+}
+button:active{
+    background-color: rgb(60, 70, 105);
+    transform: scale(0.98);
+
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator, input[type="time"]::-webkit-calendar-picker-indicator {
+    filter:invert(1);
+    opacity: 0.5;
+    cursor: pointer;    
+}
+
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    
+}
+
+@media (max-width: 768px) {
+    .user-controls {
+        flex-direction: column;
+        align-items: center;
+        
+    }
+    body {
+        padding-bottom: 70px;
+        ;
+    }
+}

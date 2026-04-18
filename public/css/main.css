@@ -18,6 +18,9 @@ h1, h2, h3 {
     padding: 15px 0;
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
 
+    display:flex;
+    gap:20px;
+
 }
 
 .button-images {
@@ -82,6 +85,18 @@ Currently, there is no way to set the Opacity Colour of the image in CSS
 
 
 
-@media (max-width:1080px){
-    
+@media (max-width: 768px) {
+    .navigation-bar {
+        position: fixed;
+        bottom:0;
+        left:0;
+        width: 100%;
+        display:fixed;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+
+        
+
+    }
 }

@@ -20,7 +20,7 @@ router.get("/:name", (req,res)=>{
     }
 
     debug(chalk.green(`Valid Planet Name Found: ${planet_name}`));
-    const filepath=path.join(__dirname,".." ,".." , "views", "planet-info.html");
+    const filepath=path.join(__dirname,".." , "views", "planet-info.html");
     
     console.log(chalk.green(`Looking for file at: ${filepath}`));
     res.sendFile(filepath);

@@ -3,12 +3,13 @@ const path = require("path");
 const debug = require("debug")("app:home");
 const chalk = require("chalk");
 
+
 const router=Router()
 
 
 router.get("/", (req,res)=>{
-    debug("Serving Up Home page");
-    res.sendFile(path.join(__dirname,".." ,".." , "views", "index.html"));
+    debug("Serving Up Calendar page");
+    res.sendFile(path.join(__dirname,".." , "views", "calendar.html"));
 })
 
 module.exports=router;
