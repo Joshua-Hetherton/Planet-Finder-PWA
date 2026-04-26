@@ -1,4 +1,4 @@
-import {getPlanetPosition, getPlanetPositionTime, getVisiblePlanets, moonPhase, findNextEclipse} from "./astronomy-calc.js";
+//import {getPlanetPosition, getPlanetPositionTime, getVisiblePlanets, moonPhase, findNextEclipse} from "./astronomy-calc.js";
 
 //Get the planet name from URL to load correct data
 const URL_Planet_Name= window.location.pathname.split("/").pop();
@@ -19,17 +19,30 @@ Or Done automaitcally with an API
 */
 
 //Self Inputted location from the planet-info page
-manualLocationButton.addEventListener("click", () => {
-    const latitude= parseFloat(document.getElementById("latitude").value);
-    const longitude= parseFloat(document.getElementById("longitude").value);
+const ManualLocationButton= document.getElementById("submit-location")
+ManualLocationButton.addEventListener("click", () => {
+    const latitude= parseFloat(document.getElementById("lat-input").value);
+    const longitude= parseFloat(document.getElementById("long-input").value);
 
     if (isNaN(latitude) || isNaN(longitude)) {
         alert("Enter a valid latitude and Longitude");
         return;
     }
+    console.log ('Latitude:', latitude, 'longitude:', longitude);
     LoadPlanetData(latitude, longitude)
 });
 
 
 //Automatic Location with API
-
+//Uses the Button id="Auto-Locate".
+//Uses the Geolocation API to get the users position
+const AutoLocationButton= document.getElementById("Auto-Locate");
+AutoLocationButton.addEventListener("click", () => {
+    if( "geolocation" in navigator ) {
+        navigator.geolocation.getCurrentPosition( position => {
+            const latitude= position.coords.latitude;
+            const longitude= position.coords.longitude;
+            console.log ('Latitude:', latitude, 'longitude:', longitude);
+        });
+    }
+});
