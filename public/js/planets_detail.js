@@ -3,16 +3,6 @@
 //Get the planet name from URL to load correct data
 const URL_Planet_Name= window.location.pathname.split("/").pop();
 
-
-
-//Uses async functions to load the data to display on the Page while still working in the background
-
-async function LoadPlanetData(lat, long) {
-    const planetName= URL_Planet_Name;
-    //
-}
-
-
 /*Calculates the users position/location
 Either it can be inputted manually (lat and long, incase they arent are that location yet)
 Or Done automaitcally with an API
@@ -29,7 +19,7 @@ ManualLocationButton.addEventListener("click", () => {
         return;
     }
     console.log ('Latitude:', latitude, 'longitude:', longitude);
-    LoadPlanetData(latitude, longitude)
+    LoadPlanetData(latitude, longitude);
 });
 
 
@@ -60,3 +50,34 @@ window.addEventListener("load", () => {
 
 
 });
+
+//Uses async functions to load the data to display on the Page while still working in the background
+
+async function LoadPlanetData(lat, long) {
+    const planetName=URL_Planet_Name
+    if(planetName!="moon"){
+        console.log("Loading planet data for:", planetName);
+        const retrieved_date=document.getElementById("date-input").value;
+        const retrieved_time=document.getElementById("time-input").value;
+        const retrieved_latitude= parseFloat(document.getElementById("lat-input").value);
+        const retrieved_longitude= parseFloat(document.getElementById("long-input").value);
+
+        //Merging date and time into single Date object for Planet position calcs
+        const retrieved_date_time= new Date(`${retrieved_date}T${retrieved_time}`);
+
+        console.log ("Date Time:", retrieved_date_time, "Latitude:", retrieved_latitude, "Longitude:", retrieved_longitude);
+
+        //Loads and logs Planet Position Data
+        const planet_position=getPlanetPosition(retrieved_latitude, retrieved_longitude, retrieved_date_time,planetName);
+        console.log(planet_position);
+
+        const planet_observable_time= getPlanetObserveableTime(retrieved_latitude, retrieved_longitude, retrieved_date_time, planetName);
+        console.log(planet_observable_time);
+
+
+    }
+    else {
+        console.log("Loading planet data for: moon");
+    }
+}
+
