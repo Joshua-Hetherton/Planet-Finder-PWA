@@ -9,7 +9,7 @@ const URL_Planet_Name= window.location.pathname.split("/").pop();
 
 async function LoadPlanetData(lat, long) {
     const planetName= URL_Planet_Name;
-
+    //
 }
 
 
@@ -43,6 +43,20 @@ AutoLocationButton.addEventListener("click", () => {
             const latitude= position.coords.latitude;
             const longitude= position.coords.longitude;
             console.log ('Latitude:', latitude, 'longitude:', longitude);
+            document.getElementById("lat-input").value= latitude;
+            document.getElementById("long-input").value= longitude;
+            LoadPlanetData(latitude, longitude);
         });
     }
+});
+
+//Automatically sets the current date and time in the input field when the page loads
+window.addEventListener("load", () => {
+    const current_date_time=new Date();
+    console.log(current_date_time);
+    const date_time_arr=current_date_time.toISOString().split("T");
+    document.getElementById("date-input").value=date_time_arr[0];
+    document.getElementById("time-input").value=date_time_arr[1].split(".")[0];
+
+
 });
