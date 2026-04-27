@@ -45,7 +45,7 @@ function getPlanetPosition(latitude, longitude, date, planet_name) {
 /*
 gets rise, set and transit time when given a planet, date and location
 */
-    function getPlanetObserveableTime(latitude, longitude, date, planet_name) {
+    function getPlanetObservableTime(latitude, longitude, date, planet_name) {
 
         const observer= new Astronomy.Observer( latitude, longitude, 0);
 
@@ -53,26 +53,26 @@ gets rise, set and transit time when given a planet, date and location
 
         /*Gets rise time 
         direction=+1 refers to the east*/
-        const rise_time= Astronomy.SearchRiseSet(body, observer, date, +1, 0);
+        const rise_time= Astronomy.SearchRiseSet(body, observer, +1, date, 300, 0);
         /*Gets rise time 
         direction=-1 refers to the west*/
-        const set_time=Astronomy.SearchRiseSet(body, observer, date, -1, 0);
+        const set_time=Astronomy.SearchRiseSet(body, observer, -1, date, 300, 0);
 
         /*Gets transit time, how long it will be visible*/
-    const transit_time=Astronomy.SearchHourAngle(body, observer, +1, date);
+        const transit_time=Astronomy.SearchHourAngle(body, observer, +1, date);
 
-    //Finding culmination time, when it will be at its highest point in the sky (when the hour angle is 0)
-    const culmination_time= Astronomy.SearchHourAngle(body, observer,0, date);
+        //Finding culmination time, when it will be at its highest point in the sky (when the hour angle is 0)
+        const culmination_time= Astronomy.SearchHourAngle(body, observer,0, date);
 
-    return {
-        planet: planet_name,
-        date: date.toISOString(),
-        rise_time: rise_time,
-        set_time: set_time,
-        transit_time: transit_time,
-        culmination_time: culmination_time
+        return {
+            planet: planet_name,
+            date: date.toISOString(),
+            rise_time: rise_time,
+            set_time: set_time,
+            transit_time: transit_time,
+            culmination_time: culmination_time
 
-    }
+        }
 
     }
 
