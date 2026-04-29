@@ -11,7 +11,7 @@ router.get("/:name", (req,res)=>{
     const planet_name=req.params.name.toLowerCase();
     debug(chalk.blue("Planet Name:", planet_name));
 
-    const valid_planets=["mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune"];
+    const valid_planets=["mercury", "venus", "moon", "mars", "jupiter", "saturn", "uranus", "neptune"];
 
 
     if (!valid_planets.includes(planet_name)) {

@@ -55,29 +55,42 @@ window.addEventListener("load", () => {
 
 async function LoadPlanetData(lat, long) {
     const planetName=URL_Planet_Name
+    const retrieved_date=document.getElementById("date-input").value;
+    const retrieved_time=document.getElementById("time-input").value;
+    const retrieved_latitude= parseFloat(document.getElementById("lat-input").value);
+    const retrieved_longitude= parseFloat(document.getElementById("long-input").value);
+
+    //Merging date and time into single Date object for Planet position calcs
+    const retrieved_date_time= new Date(`${retrieved_date}T${retrieved_time}`);
+
+    console.log ("Date Time:", retrieved_date_time, "Latitude:", retrieved_latitude, "Longitude:", retrieved_longitude);
+
+
     if(planetName!="moon"){
         console.log("Loading planet data for:", planetName);
-        const retrieved_date=document.getElementById("date-input").value;
-        const retrieved_time=document.getElementById("time-input").value;
-        const retrieved_latitude= parseFloat(document.getElementById("lat-input").value);
-        const retrieved_longitude= parseFloat(document.getElementById("long-input").value);
-
-        //Merging date and time into single Date object for Planet position calcs
-        const retrieved_date_time= new Date(`${retrieved_date}T${retrieved_time}`);
-
-        console.log ("Date Time:", retrieved_date_time, "Latitude:", retrieved_latitude, "Longitude:", retrieved_longitude);
 
         //Loads and logs Planet Position Data
         const planet_position=getPlanetPosition(retrieved_latitude, retrieved_longitude, retrieved_date_time,planetName);
         console.log(planet_position);
 
-        const planet_observable_time= getPlanetObserveableTime(retrieved_latitude, retrieved_longitude, retrieved_date_time, planetName);
+        const planet_observable_time= getPlanetObservableTime(retrieved_latitude, retrieved_longitude, retrieved_date_time, planetName);
         console.log(planet_observable_time);
 
 
     }
     else {
         console.log("Loading planet data for: moon");
+        const moon_position= getPlanetPosition(retrieved_latitude,retrieved_longitude, retrieved_date_time, planetName);
+        console.log(moon_position);
+
+        const moon_observable_time= getPlanetObservableTime(retrieved_latitude, retrieved_longitude, retrieved_date_time, planetName);
+        console.log(moon_observable_time);
+
+        const current_moon_phase= moonPhase(retrieved_date_time);
+        console.log("Current Moon Phase:", current_moon_phase);
+
+        const next_5_lunar_eclipse= findNextEclipse(retrieved_date_time);
+        console.log("Next 5 Lunar Eclipses:", next_5_lunar_eclipse);
     }
 }
 

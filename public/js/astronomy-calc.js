@@ -3,7 +3,7 @@
 const planet_names= {
     'mercury' : Astronomy.Body.Mercury,
     'venus': Astronomy.Body.Venus ,
-    'earth':  Astronomy.Body.Earth,
+    'moon':  Astronomy.Body.Moon,
     'mars': Astronomy.Body.Mars,
     'jupiter': Astronomy.Body.Jupiter,
     'saturn': Astronomy.Body.Saturn,
@@ -119,16 +119,14 @@ function moonPhase(date) {
 Finds the next 5 lunar eclipses from a given date
 */
 function findNextEclipse(date) {
-    eclipses_date=[];
-    eclipses_date.push(Astronomy.SearchLunarEclipse(date));
+    eclipses=[];
+    let eclipse= Astronomy.SearchLunarEclipse(date);
     for (let i=0; i<5; i++) {
-        eclipses_date.push(Astronomy.NextLunarEclipse(eclipses_date[i]));
+        eclipses.push({date: eclipse.peak.date.toISOString(), type: eclipse.kind});
+        eclipse= Astronomy.NextLunarEclipse(eclipse.peak);
     }
     //Add type of eclipse on eclipses
-    return {
-        eclipses: eclipses_date.map(eclipse => ({ date: eclipse.toISOString(),
-             type: eclipses })),
-    }
+    return { eclipses};
 }
 
 
