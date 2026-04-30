@@ -91,6 +91,35 @@ async function LoadPlanetData(lat, long) {
 
         const next_5_lunar_eclipse= findNextEclipse(retrieved_date_time);
         console.log("Next 5 Lunar Eclipses:", next_5_lunar_eclipse);
+
+        await UniversalGridUpdate("PlanetOrbit", moon_position);
+        await UniversalGridUpdate("Rise-And-Set", moon_observable_time);
+        await UniversalGridUpdate("Orbital-Information", { "Current Moon Phase": current_moon_phase});
+        await UniversalGridUpdate("Orbital-Information", next_5_lunar_eclipse);
+        /*Todo Universal Grid Update for Fun Facts. Possibly use a Nasa API for fun facts about a selected planet
+        Either Use:
+            -https://api.le-systeme-solaire.net/en/ Lots of facts
+            -https://api-ninjas.com/api/planets Less facts but easier
+
+        Use the nasas API to get a potential Image of the planet, or to display pictures from that planet. Could also use the Mars Weather Data.
+        */
+        
+
+
     }
+}
+
+async function UniversalGridUpdate(id, data) {
+    const grid_update= document.getElementById(id);
+    grid_update.innerHTML="";
+
+    for (let key in data) {
+        tile= document.createElement("div");
+        tile.classList.add ("info-tile");
+        tile.innerHTML=`<strong> ${key}: </strong> ${data[key]}`;
+        
+        grid_update.appendChild(tile);
+    }
+
 }
 

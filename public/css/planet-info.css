@@ -75,6 +75,30 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
     margin: 0;
     
 }
+.planet-information {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:20px;
+    margin: 10px;
+}
+.info-tile {
+    background-color: rgba(28,28, 34, 0.8);
+    padding: 15px;
+    margin: 5px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.info-tile h2{
+    margin: 0;
+    margin-bottom: 2px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+}
 
 @media (max-width: 768px) {
     .user-controls {
@@ -84,6 +108,13 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
     }
     body {
         padding-bottom: 70px;
-        ;
+        
     }
+    .planet-information {
+        grid-template-columns: 1fr;
+    }
+    #Fun-Facts {
+        visibility: hidden;
+    }
+
 }
