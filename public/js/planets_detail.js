@@ -76,6 +76,10 @@ async function LoadPlanetData(lat, long) {
         const planet_observable_time= getPlanetObservableTime(retrieved_latitude, retrieved_longitude, retrieved_date_time, planetName);
         console.log(planet_observable_time);
 
+        await UniversalGridUpdate("PlanetOrbit", planet_position);
+        await UniversalGridUpdate("Rise-And-Set", planet_observable_time);
+    
+
 
     }
     else {
