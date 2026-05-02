@@ -3,18 +3,18 @@ require('dotenv').config();
 const app = require('./app');
 const chalk = require('chalk');
 const debug = require('debug')('app');
-const fetch= requre("node-fetch");
+// const fetch= require("node-fetch");
 const PORT = process.env.PORT || 5000;
 
-app.get("/api/Planet-facts", async (request, resp) => {
-    const planeName=reqqest.query.planetName;
+app.get("/api/planet-facts", async (request, resp) => {
+    const planetName=request.query.planetName;
     
     if (!planetName)
         return resp.status(400).json({ error:" Missing Planet Name. Required Field planetName"});
     try{
         const response= await fetch(`https://api.api-ninjas.com/v1/planets?name=${planetName}`,{
             method: "GET",
-            headers: {"X-Api-Key": process.env.NINJA_PLANET_API_Key
+            headers: {"X-Api-Key": process.env.NINJA_PLANET_API_KEY
             }
         })
         if (!response.ok) {
