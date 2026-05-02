@@ -79,10 +79,10 @@ async function LoadPlanetData(lat, long) {
         // Reformats the data for easier viewing ond display page
         const rephrased_planet_position= {
             "At Date: ": `${retrieved_date_time}`,
-            "Alitude: ": `${planet_position["altitude"]} °`,
+            "Alitude: ": `${planet_position["altitude"].toFixed(2)} °`,
             "Azimuth ": `${planet_position["azimuth"].toFixed(5)} °`,
             "Current Visible: ": `${ planet_position["is_visible"] ? "yes" : "no" }`,
-            "Current AU Distance:": `${planet_position["AU_distance"]} AU`,
+            "Current AU Distance:": `${planet_position["AU_distance"].toFixed(2)} AU`,
             
             };
 
@@ -171,4 +171,12 @@ async function ReformatDateTime(date_time) {
     const new_date={year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit"};
 
     return date.toLocaleDateString("en-GB", new_date);
+}
+
+async function GetPlanetCharacteristics(planetName) {
+    
+}
+
+async function GetPlanetFunFacts(planetName) {
+
 }
