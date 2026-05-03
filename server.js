@@ -17,11 +17,22 @@ app.get("/api/planet-info", async (request, resp) => {
             headers: {
                 "Authorization": `Bearer ${process.env.LE_SYSTEME_SOLAIRE_API_KEY}`}
         });
-        if (!response.ok) {
+        const nasa_response=await fetch(`https://api.nasa.gov/insight_weather/`, {
+            method: "GET",
+            headers: {
+                "api_key": process.env.NASA_API_KEY,
+                "feedtype": "json",
+                "ver":"1.0"
+            }
+        });
+        if (!response.ok || !nasa_response.ok) {
             throw new Error(`API request failed: ${response.status} ${response.statusText}`);
         }
         const gathered_data=await response.json();
+        const nasa_gathered_data=await nasa_response.json();
+
         resp.json(gathered_data);
+
 
     }
     catch (error)
@@ -31,6 +42,8 @@ app.get("/api/planet-info", async (request, resp) => {
     }
 
 });
+
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${chalk.green(PORT)}`);
