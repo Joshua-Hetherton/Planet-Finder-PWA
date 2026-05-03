@@ -107,11 +107,10 @@ async function LoadPlanetData(lat, long) {
         Use the nasas API to get a potential Image of the planet, or to display pictures from that planet. Could also use the Mars Weather Data.
         */
         /*Use the API to fill in the orbital information, Planet Characteristics, and Fun Facts */
-
+        const API_planet_data= await GetPlanetCharacteristics(planetName);
+            console.log(API_planet_data);
         switch (planetName.toLowerCase()) {
             case "mercury":
-                const mercury_data= await GetPlanetCharacteristics(planetName);
-                console.log(mercury_data);
                 break;
             case "venus":
                 break;
@@ -179,7 +178,26 @@ async function GetPlanetCharacteristics(planetName) {
     const response= await fetch(`/api/planet-info?planetName=${planetName}`);
     return response.json();
 }
-
-// async function GetPlanetFunFacts(planetName) {
-
-// }
+async function CleanPlanetCharacteristics(planet_Data) {
+    cleaned_data= {
+        "Gravity": `${planet_Data.gravity} m/s\(n^{2}\)`,
+        "Density": `${planet_Data.density} g/cm\(n^{3}\)`,
+        "Mass": `${planet_Data.mass} kg`,
+        "Mean Radius": `${planet_Data.meanRadius} km`,
+        "Aphelion": `${planet_Data.aphelion}km`,
+        "Perihelion": `${planet_Data.perihelion}km`,
+        "Inclination": `${planet_Data.inclination} °`,
+        "Eccentricity": `${planet_Data.eccentricity}`,
+        "Sideral Orbit Period": `${planet_Data.sideralOrbit} days`,
+        "Rotation Period": `${planet_Data.sideralRotation} hours`,
+        "Average Temperature": `${planet_Data.avgTemp} °C`,
+        "Moons": `${planet_Data.Moons ? planet_Data.Moons.length :0}`,
+        "Discovered By": `${planet_Data.discoveredBy || "N/A"}`,
+        "Discovery Date": `${planet_Data.discoveryDate || "N/A"}`,
+        "Escape Velocity": `${planet_Data.escape} m/s`,
+        
+    }
+    return {
+        cleaned_data
+    }
+}
