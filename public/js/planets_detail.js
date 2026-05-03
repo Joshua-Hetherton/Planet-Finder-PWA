@@ -110,6 +110,8 @@ async function LoadPlanetData(lat, long) {
 
         switch (planetName.toLowerCase()) {
             case "mercury":
+                const mercury_data= await GetPlanetCharacteristics(planetName);
+                console.log(mercury_data);
                 break;
             case "venus":
                 break;
@@ -174,9 +176,10 @@ async function ReformatDateTime(date_time) {
 }
 
 async function GetPlanetCharacteristics(planetName) {
-    
+    const response= await fetch(`/api/planet-info?planetName=${planetName}`);
+    return response.json();
 }
 
-async function GetPlanetFunFacts(planetName) {
+// async function GetPlanetFunFacts(planetName) {
 
-}
+// }
