@@ -107,22 +107,32 @@ async function LoadPlanetData(lat, long) {
         Use the nasas API to get a potential Image of the planet, or to display pictures from that planet. Could also use the Mars Weather Data.
         */
         /*Use the API to fill in the orbital information, Planet Characteristics, and Fun Facts */
-        const API_planet_data= await GetPlanetCharacteristics(planetName);
+        const API_planet_data= await CleanPlanetCharacteristics(await GetPlanetCharacteristics(planetName));
             console.log(API_planet_data);
+            await UniversalGridUpdate("Orbital-Information", API_planet_data.cleaned_data);
+
+        
         switch (planetName.toLowerCase()) {
             case "mercury":
+                await UniversalGridUpdate("Fun-Facts", {});
                 break;
             case "venus":
+                await UniversalGridUpdate("Fun-Facts", {});
                 break;
             case "mars":
+                await UniversalGridUpdate("Fun-Facts", {});
                 break;
             case "jupiter":
+                await UniversalGridUpdate("Fun-Facts", {});
                 break;
             case "saturn":
+                await UniversalGridUpdate("Fun-Facts", {});
                 break;
             case "uranus":
+                await UniversalGridUpdate("Fun-Facts", {});
                 break;
             case "neptune":
+                await UniversalGridUpdate("Fun-Facts", {});
                 break;
             default:
                 console.log(`No additional information for ${planetName}`);
@@ -191,7 +201,7 @@ async function CleanPlanetCharacteristics(planet_Data) {
         "Sideral Orbit Period": `${planet_Data.sideralOrbit} days`,
         "Rotation Period": `${planet_Data.sideralRotation} hours`,
         "Average Temperature": `${planet_Data.avgTemp} °C`,
-        "Moons": `${planet_Data.Moons ? planet_Data.Moons.length :0}`,
+        "Moons": `${planet_Data.Moons ? planet_Data.Moons.length :"No Moons"}`,
         "Discovered By": `${planet_Data.discoveredBy || "N/A"}`,
         "Discovery Date": `${planet_Data.discoveryDate || "N/A"}`,
         "Escape Velocity": `${planet_Data.escape} m/s`,
