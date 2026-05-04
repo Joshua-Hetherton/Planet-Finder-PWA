@@ -107,14 +107,16 @@ async function LoadPlanetData(lat, long) {
         Use the nasas API to get a potential Image of the planet, or to display pictures from that planet. Could also use the Mars Weather Data.
         */
         /*Use the API to fill in the orbital information, Planet Characteristics, and Fun Facts */
-        const API_planet_data= await CleanPlanetCharacteristics(await GetPlanetCharacteristics(planetName));
+        const API_planet_data=await GetPlanetCharacteristics(planetName);
+        const cleaned_planet_data=await CleanPlanetCharacteristics(API_planet_data.le_solaire);
             console.log(API_planet_data);
-            await UniversalGridUpdate("Orbital-Information", API_planet_data.cleaned_data);
+            console.log(cleaned_planet_data);
+            await UniversalGridUpdate("Orbital-Information", cleaned_planet_data.cleaned_data);
 
         
         switch (planetName.toLowerCase()) {
             case "mercury":
-                await UniversalGridUpdate("Fun-Facts", {});
+                await UniversalGridUpdate("Fun-Facts", {GetRandomPlanetImage: API_planet_data.nasa_images_data.collection.items[0].links[0].href});
                 break;
             case "venus":
                 await UniversalGridUpdate("Fun-Facts", {});
@@ -190,18 +192,20 @@ async function GetPlanetCharacteristics(planetName) {
 }
 async function CleanPlanetCharacteristics(planet_Data) {
     cleaned_data= {
-        "Gravity": `${planet_Data.gravity} m/s\(n^{2}\)`,
-        "Density": `${planet_Data.density} g/cm\(n^{3}\)`,
-        "Mass": `${planet_Data.mass} kg`,
+        "Gravity": `${planet_Data.gravity} m/s²`,
+        "Density": `${planet_Data.density} g/cm³`,
+        "Mass": planet_Data.mass ? `${planet_Data.mass.massValue}x 10^${planet_Data.mass.massExponent}` : "N/A",
         "Mean Radius": `${planet_Data.meanRadius} km`,
-        "Aphelion": `${planet_Data.aphelion}km`,
-        "Perihelion": `${planet_Data.perihelion}km`,
+        "Polar Radius": `${planet_Data.polarRadius} km`,
+        "Equatorial Radius": `${planet_Data.equaRadius} km`,
+        "Aphelion": `${planet_Data.aphelion} km`,
+        "Perihelion": `${planet_Data.perihelion} km`,
         "Inclination": `${planet_Data.inclination} °`,
         "Eccentricity": `${planet_Data.eccentricity}`,
         "Sideral Orbit Period": `${planet_Data.sideralOrbit} days`,
         "Rotation Period": `${planet_Data.sideralRotation} hours`,
-        "Average Temperature": `${planet_Data.avgTemp} °C`,
-        "Moons": `${planet_Data.Moons ? planet_Data.Moons.length :"No Moons"}`,
+        "Average Temperature": `${planet_Data.avgTemp} K`,
+        "Moons": `${planet_Data.moons ? planet_Data.moons.length :"No Moons"}`,
         "Discovered By": `${planet_Data.discoveredBy || "N/A"}`,
         "Discovery Date": `${planet_Data.discoveryDate || "N/A"}`,
         "Escape Velocity": `${planet_Data.escape} m/s`,
@@ -210,4 +214,10 @@ async function CleanPlanetCharacteristics(planet_Data) {
     return {
         cleaned_data
     }
+}
+
+async function GetRandomPlanetImage(planetName) {
+    const response= await fetch(`/api/planet-info?planetName=${planetName}`);
+    
+    return response.json();
 }

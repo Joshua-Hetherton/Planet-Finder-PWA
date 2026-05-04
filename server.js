@@ -3,7 +3,6 @@ require('dotenv').config();
 const app = require('./app');
 const chalk = require('chalk');
 const debug = require('debug')('app');
-// const fetch= require("node-fetch");
 const PORT = process.env.PORT || 5000;
 
 app.get("/api/planet-info", async (request, resp) => {
@@ -12,26 +11,22 @@ app.get("/api/planet-info", async (request, resp) => {
     if (!planetName)
         return resp.status(400).json({ error:" Missing Planet Name. Required Field planetName"});
     try{
+        //LE_SYSTEME_SOLAIRE_API
         const response= await fetch(`https://api.le-systeme-solaire.net/rest/bodies/${planetName.toLowerCase()}`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${process.env.LE_SYSTEME_SOLAIRE_API_KEY}`}
         });
-        const nasa_response=await fetch(`https://api.nasa.gov/insight_weather/`, {
-            method: "GET",
-            headers: {
-                "api_key": process.env.NASA_API_KEY,
-                "feedtype": "json",
-                "ver":"1.0"
-            }
-        });
+        // Nasa API for Images
+        const nasa_response=await fetch(`https://images-api.nasa.gov/search?q=${planetName}%20planet&page=1`); 
+
         if (!response.ok || !nasa_response.ok) {
             throw new Error(`API request failed: ${response.status} ${response.statusText}`);
         }
-        const gathered_data=await response.json();
-        const nasa_gathered_data=await nasa_response.json();
+        const le_solaire=await response.json();
+        const nasa_images_data=await nasa_response.json();
 
-        resp.json(gathered_data);
+        resp.json({le_solaire, nasa_images_data });
 
 
     }
