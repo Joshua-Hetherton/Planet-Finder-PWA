@@ -2,6 +2,13 @@ let current_date=new Date();
 let currnent_month=current_date.getMonth();
 let current_year=current_date.getFullYear();
 
+async function updateCalendarMonthTitle() {
+    const month_title=document.getElementById("")
+    const month_name= current_date.toLocaleString("default", {month:"long"});
+
+    month_title.textContent= `${month_name}, ${current_year}`;
+}
+
 async function generateCalendar() {
     const grid=document.getElementById("calendar-grid").innerHTML="";
     //Gets days in month by using getDate() to look at first day of new month
@@ -23,4 +30,24 @@ async function generateCalendar() {
         grid.appendChild(day_cell);
     }
 }
+
+
+document.getElementById("Previous-Month").addEventListener("click", () => {
+
+});
+
+document.getElementById("Next-Month").addEventListener("click", () => {
+
+});
+
+document.getElementById("Today").addEventListener("click", () => {
+
+});
+
+document.getElementById("submit-information").addEventListener("click", () => {
+
+});
+document.getElementById("close-editor").addEventListener("click", () => {
+
+});
 
