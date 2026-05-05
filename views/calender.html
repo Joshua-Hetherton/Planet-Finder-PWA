@@ -33,26 +33,33 @@
 
         <div id="Edit-day" class="hidden">
             <div class="Edit-container">
-                <label>Tags</label>
+                <h3 id="date-Editor"></h3>
 
+                <p> Visible Planets</p>
                 <label>Planets Viewed</label>
                 <select id="planet-view-tags">
                     <!-- Dynamic via JavaScript-->
                 </select>
                 
                 <label>Equipment Used</label>
-                <input type="string" id="equipment-used" placeholder ="Equipment Used">
+                <input type="text" id="equipment-used" placeholder ="Equipment Used">
 
                 <label> Viewing Location</label>
-                <input type="location" id="viewing-location" placeholder=" Viewed from">
+                <input type="text" id="viewing-location" placeholder=" Viewed from">
 
+                <label> Notes</label>
+                <textextra id="user-notes" placeholder="Addtional Notes"></textextra>
 
                 <button id="submit-information">Submit</button>
+                <button id="close-editor">Close</button>
             </div>
 
 
         </div>
+        <script src="/js/astronomy.browser.min.js"></script>
+        <script src="/js/astronomy-calc.js"></script>
+        <script src="/js/planets_detail.js"></script>
+        <script src="/js/calendar.js"></script>
     </body>
-
 
 </html>
