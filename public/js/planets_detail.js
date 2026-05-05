@@ -217,7 +217,16 @@ async function CleanPlanetCharacteristics(planet_Data) {
 }
 
 async function GetRandomPlanetImage(planetName) {
-    const response= await fetch(`/api/planet-info?planetName=${planetName}`);
-    
-    return response.json();
+    const response= await fetch(`/api/planet-info?planetName=${planetName}`).nasa_images_data.collection.items;
+
+    //Finds random image by selecting random index of array in collection images from nasa_images_data
+    const pick_random_image= response[Math.floor(Math.random() * response.length)].links[0].href
+    const random_image_response =await fetch(pick_random_image);
+    const random_image= await random_image_response.json();
+
+    return random_image;
+
+
+
+
 }
