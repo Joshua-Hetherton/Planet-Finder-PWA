@@ -4,7 +4,54 @@
         <title>Planet Calendar</title>
     </head>
     <body>
+        <div class="navigation-bar">
+            <a href="/">Home</a>
+            <a href="/views/planet-info.html">Planets</a>
+            <a href="/views/calender.html">Viewing Calendar</a>
+        </div>
+        
+        <div class="calendar-container">
+            <div class="calendar-control">
+                <button id="Previous-Month">Previous Month</button>
+                <button id="Next-Month"> Next Month</button>
+                <button id="Today">Today</button>
+            </div>
+            <div id="calendar-weekdays">
+                <div class="weekday">Monday</div>
+                <div class="weekday">Tuesday</div>
+                <div class="weekday">Wednesday</div>
+                <div class="weekday">Thursday</div>
+                <div class="weekday">Friday</div>
+                <div class="weekday">Saturday</div>
+                <div class="weekday">Sunday</div>
 
+            </div>
+            <div id="grid-calender">
+                
+            </div>
+        </div>
+
+        <div id="Edit-day" class="hidden">
+            <div class="Edit-container">
+                <label>Tags</label>
+
+                <label>Planets Viewed</label>
+                <select id="planet-view-tags">
+                    <!-- Dynamic via JavaScript-->
+                </select>
+                
+                <label>Equipment Used</label>
+                <input type="string" id="equipment-used" placeholder ="Equipment Used">
+
+                <label> Viewing Location</label>
+                <input type="location" id="viewing-location" placeholder=" Viewed from">
+
+
+                <button id="submit-information">Submit</button>
+            </div>
+
+
+        </div>
     </body>
 
 
