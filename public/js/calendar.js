@@ -47,6 +47,7 @@ document.getElementById("Today").addEventListener("click", () => {
 document.getElementById("submit-information").addEventListener("click", () => {
 
 });
+
 document.getElementById("close-editor").addEventListener("click", () => {
 
 });
