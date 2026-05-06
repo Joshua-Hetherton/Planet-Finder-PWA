@@ -9,6 +9,35 @@ async function updateCalendarMonthTitle() {
     month_title.textContent= `${month_name}, ${current_year}`;
 }
 
+//Higghlighter function for when the user clicks "Today"
+async function highlightCurrentDay() {
+    const today=new Date();
+    //Highlight exact day and year on calendar
+    if (today.getMonth()== current_month && today.getFullYear()== current_year) {
+        const day_cells=document.querySelectorAll(".day");
+
+        day_cells.forEach(cell => {
+            const day_cell=cell.querySelector(".date, .day");
+            if (day_cell) {
+                const cell_day=parseInt(day_cell.textContent);
+                
+
+                if (cell_day === today.getDate()) {
+                    cell.classList.add("highlight-today");
+                    cell.id="today";
+
+                }
+                else {
+                    cell.classList.remove("highlight-today");
+                    if (cell.id== "today") {
+                        cell.removeAttribute("id");
+                    }
+                }
+            }
+        })
+    }
+}
+
 async function generateCalendar() {
     const grid=document.getElementById("grid-calendar");
     grid.innerHTML="";
@@ -43,7 +72,9 @@ document.getElementById("Previous-Month").addEventListener("click", () => {
         current_month=11;
         current_year--;
     }
-    generateCalendar();
+
+    updateCalendarMonthTitle();
+    highlightCurrentDay();
 });
 
 document.getElementById("Next-Month").addEventListener("click", () => {
@@ -53,14 +84,18 @@ document.getElementById("Next-Month").addEventListener("click", () => {
         current_year++;
     }
     generateCalendar();
+    updateCalendarMonthTitle();
+     highlightCurrentDay();
 });
 
 document.getElementById("Today").addEventListener("click", () => {
     current_date=new Date()
-    current_Month=current_date.getMonth();
+    current_month=current_date.getMonth();
     current_year=current_date.getFullYear();
 
     generateCalendar();
+    updateCalendarMonthTitle();
+    highlightCurrentDay();
 });
 
 document.getElementById("submit-information").addEventListener("click", () => {
@@ -70,4 +105,6 @@ document.getElementById("submit-information").addEventListener("click", () => {
 document.getElementById("close-editor").addEventListener("click", () => {
 
 });
+
+generateCalendar();
 
