@@ -115,8 +115,18 @@ Currently, there is no way to set the Opacity Colour of the image in CSS
         justify-content: space-around;
         align-items: center;
 
+        /* Fixing large size */
+        padding:8px 0;
+        gap:10px;
+
         background-color: rgba(15, 15, 18, 0.902);
         box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
+
+        
+    }
+    .navigation-bar a {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.9rem;
     }
 
 }

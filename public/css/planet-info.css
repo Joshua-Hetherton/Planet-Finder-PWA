@@ -124,5 +124,8 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
     #Fun-Facts {
         visibility: hidden;
     }
+    .wide-tile {
+        grid-column: span 1;
+    }
 
 }
