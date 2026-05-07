@@ -19,7 +19,7 @@ async function highlightCurrentDay() {
         day_cells.forEach(cell => {
             const day_cell=cell.querySelector(".date");
             if (day_cell) {
-                const cell_day=parseInt(day_cell.textContent);
+            const cell_day=parseInt(day_cell.textContent);
                 
 
                 if (cell_day === today.getDate()) {
@@ -65,7 +65,7 @@ async function generateCalendar() {
     updateCalendarMonthTitle();
     highlightCurrentDay();
 }
-
+// All buttons for Calendar navigation and editing the days
 
 document.getElementById("Previous-Month").addEventListener("click", () => {
     current_month--;

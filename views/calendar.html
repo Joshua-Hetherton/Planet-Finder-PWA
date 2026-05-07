@@ -4,6 +4,7 @@
         <title>Planet Calendar</title>
         <link rel="stylesheet" href="/css/main.css">
         <link rel="stylesheet" href="/css/calendar.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div class="navigation-bar">
@@ -12,6 +13,7 @@
             <a href="/calendar">Viewing Calendar</a>
         </div>
         
+        <!-- Holds all calendar related items-->
         <div class="calendar-container">
             <h2 id="Calendar-title"></h2>
             <div class="calendar-control">
@@ -29,11 +31,12 @@
                 <div class="weekday">Sunday</div>
 
             </div>
+            <!-- Left empty to be filled in by the calendar.js-->
             <div id="grid-calendar">
                 
             </div>
         </div>
-
+        <!-- Allows user to edit the selected day to add viewing times etc.-->
         <div id="Edit-day" class="hidden">
             <div class="Edit-container">
                 <h3 id="date-Editor"></h3>
@@ -41,7 +44,8 @@
                 <p> Visible Planets</p>
                 <label>Planets Viewed</label>
                 <select id="planet-view-tags">
-                    <!-- Dynamic via JavaScript-->
+                    <!-- Dynamic via JavaScript
+                     Meaning no hardcoded options are available from the get-go-->
                 </select>
                 
                 <label>Equipment Used</label>
@@ -50,6 +54,8 @@
                 <label> Viewing Location</label>
                 <input type="text" id="viewing-location" placeholder=" Viewed from">
 
+                <!-- For optional things like:
+                 Viewing conditions (If it was foggy, cloudy etc.)-->
                 <label> Notes</label>
                 <textextra id="user-notes" placeholder="Addtional Notes"></textextra>
 
