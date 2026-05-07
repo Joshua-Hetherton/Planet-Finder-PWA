@@ -13,14 +13,28 @@ h1, h2, h3 {
 }
 
 .navigation-bar {
-    background-color: rgba(15, 15, 18, 0.902);;
-    width: 100%;
+    /* position:fixed;
+    top:0; */
+    left:0;
+    width:100%;
     padding: 15px 0;
+    
+    background-color: rgba(15, 15, 18, 0.902);;
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
 
     display:flex;
+    justify-content: left;
     gap:20px;
+    z-index: 1000;
 
+}
+
+.navigation-bar a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-colour 0.3s;
 }
 
 .button-images {
@@ -86,17 +100,23 @@ Currently, there is no way to set the Opacity Colour of the image in CSS
 
 
 @media (max-width: 768px) {
+    body {
+        /* padding-top: 0px; */
+        padding-bottom: 70px;
+    }
     .navigation-bar {
         position: fixed;
+        top:auto;
         bottom:0;
         left:0;
         width: 100%;
-        display:fixed;
+        display:flex;
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
 
-        
-
+        background-color: rgba(15, 15, 18, 0.902);
+        box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
     }
+
 }

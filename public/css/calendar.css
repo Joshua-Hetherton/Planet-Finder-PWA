@@ -22,13 +22,27 @@
     padding: 10px 0;
     background-color: rgb(36, 36, 44);
 }
-.today {
-    outline: 2px solid rgba(120,120,255, 0.5);
+.highlight-today {
+    outline: 2px solid rgba(222, 222, 229, 0.835);
     background-color: rgba(120, 150, 255, 0.2);
 }
 
 #grid-calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap:10px;
+}
+.day {
+    position: relative;
+    padding-top: 100%;
+
+}
+.day > .date{
+    top:5px;
+    left:5px;
+    position: absolute;
+}
+
+#Edit-day {
+    visibility: hidden;
+    display: flex;
 }
