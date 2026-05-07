@@ -4,7 +4,7 @@ let current_year=current_date.getFullYear();
 
 async function updateCalendarMonthTitle() {
     const month_title=document.getElementById("Calendar-title");
-    const month_name= current_date.toLocaleString("default", {month:"long"});
+    const month_name= new Date(current_year, current_month).toLocaleDateString("default", {month: "long"});
 
     month_title.textContent= `${month_name}, ${current_year}`;
 }
@@ -17,7 +17,7 @@ async function highlightCurrentDay() {
         const day_cells=document.querySelectorAll(".day");
 
         day_cells.forEach(cell => {
-            const day_cell=cell.querySelector(".date, .day");
+            const day_cell=cell.querySelector(".date");
             if (day_cell) {
                 const cell_day=parseInt(day_cell.textContent);
                 
@@ -58,11 +58,12 @@ async function generateCalendar() {
     for( day=1; day<=month_days; day++) {
         const day_cell=document.createElement("div");
         day_cell.classList.add("day");
-        day_cell.innerHTML=`<div class="date"> ${day} </div>`;
+        day_cell.innerHTML=`<div class="date"> ${day}</div>`;
         grid.appendChild(day_cell);
     }
 
     updateCalendarMonthTitle();
+    highlightCurrentDay();
 }
 
 
@@ -72,8 +73,7 @@ document.getElementById("Previous-Month").addEventListener("click", () => {
         current_month=11;
         current_year--;
     }
-
-    updateCalendarMonthTitle();
+    generateCalendar();
     highlightCurrentDay();
 });
 
@@ -84,8 +84,7 @@ document.getElementById("Next-Month").addEventListener("click", () => {
         current_year++;
     }
     generateCalendar();
-    updateCalendarMonthTitle();
-     highlightCurrentDay();
+    highlightCurrentDay();
 });
 
 document.getElementById("Today").addEventListener("click", () => {
@@ -94,7 +93,6 @@ document.getElementById("Today").addEventListener("click", () => {
     current_year=current_date.getFullYear();
 
     generateCalendar();
-    updateCalendarMonthTitle();
     highlightCurrentDay();
 });
 
