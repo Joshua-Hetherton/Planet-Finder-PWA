@@ -155,10 +155,42 @@ async function LoadPlanetData(lat, long) {
         const next_5_lunar_eclipse= findNextEclipse(retrieved_date_time);
         console.log("Next 5 Lunar Eclipses:", next_5_lunar_eclipse);
 
-        await UniversalGridUpdate("PlanetOrbit", moon_position);
-        await UniversalGridUpdate("Rise-And-Set", moon_observable_time);
-        await UniversalGridUpdate("Orbital-Information", { "Current Moon Phase": current_moon_phase});
-        await UniversalGridUpdate("Orbital-Information", next_5_lunar_eclipse);
+        const planet_position=getPlanetPosition(retrieved_latitude, retrieved_longitude, retrieved_date_time,planetName);
+        console.log(planet_position);
+
+        const planet_observable_time= getPlanetObservableTime(retrieved_latitude, retrieved_longitude, retrieved_date_time, planetName);
+        console.log(planet_observable_time);
+
+        // Reformats the data for easier viewing ond display page
+        const rephrased_planet_position= {
+            "At Date: ": `${retrieved_date_time}`,
+            "Alitude: ": `${planet_position["altitude"].toFixed(2)} °`,
+            "Azimuth ": `${planet_position["azimuth"].toFixed(5)} °`,
+            "Current Visible: ": `${ planet_position["is_visible"] ? "yes" : "no" }`,
+            "Current AU Distance:": `${planet_position["AU_distance"].toFixed(2)} AU`,
+            
+            };
+
+        const rephrased_planet_Observable_time= {
+            "At Date": `${retrieved_date_time}`,
+            "Rise Time: ": (ReformatDateTime(planet_observable_time["rise_time"]) ? planet_observable_time["rise_time"]: "N/A"),
+            "Set Time: ": (ReformatDateTime(planet_observable_time["set_time"]) ? planet_observable_time["set_time"]: "N/A"),
+            "Transit Time: ": (ReformatDateTime(planet_observable_time["transit_time"]) ? planet_observable_time["transit_time"] : "N/A"),
+            "Culmination Time: ": (ReformatDateTime(planet_observable_time["culmination_time"]) ?planet_observable_time[ "culmination_time"]: "N/A"),
+        };
+
+        const API_planet_data=await GetPlanetCharacteristics(planetName);
+        const cleaned_planet_data=await CleanPlanetCharacteristics(API_planet_data.le_solaire);
+            console.log(API_planet_data);
+            console.log(cleaned_planet_data);
+            await UniversalGridUpdate("Orbital-Information", cleaned_planet_data.cleaned_data);
+
+        await UniversalGridUpdate("PlanetOrbit", rephrased_planet_position);
+        await UniversalGridUpdate("Rise-And-Set", rephrased_planet_Observable_time);
+        // Adds the next moon phase and lunar eclipses with the cleaned_planet_date from le solaire
+
+        await UniversalGridUpdate("Orbital-Information", { "Current Moon Phase": current_moon_phase, "Next 5 Lunar Eclipses": next_5_lunar_eclipse, ...cleaned_planet_data.cleaned_data});
+        // await UniversalGridUpdate("Orbital-Information", next_5_lunar_eclipse);
         
 
 
