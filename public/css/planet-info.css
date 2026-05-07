@@ -99,6 +99,14 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
     grid-template-columns: 1fr 1fr;
     gap: 5px;
 }
+.wide-tile {
+    grid-column: span 2;
+}
+#Orbital-Information {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+}
 
 @media (max-width: 768px) {
     .user-controls {
