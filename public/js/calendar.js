@@ -107,7 +107,8 @@ generateCalendar();
 // Editor Section
 
 async function OpenEditor(day, month, year) {
-    Editor.style.visbility = "visible";
+    const Editor=document.getElementById("Editor");
+    Editor.style.visibility="visible";
     Editor.classList.remove("hidden");
 
     const date=new Date(year, month, day);
@@ -129,5 +130,7 @@ document.getElementById("submit-information").addEventListener("click", () => {
 });
 
 document.getElementById("close-editor").addEventListener("click", () => {
-
+    const Editor=document.getElementById("Editor");
+    Editor.style.visibility="hidden";
+    Editor.classList.add("hidden");
 });
