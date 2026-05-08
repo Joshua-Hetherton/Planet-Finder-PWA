@@ -7,6 +7,10 @@
     border-radius: 8px;
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.05);
+
+    /* Stops overflow (Sunday would extend beyound screen) */
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 
@@ -17,6 +21,10 @@
     font-weight: bold;
 
 }
+#calendar-weekdays .short-text {
+    display:none;
+}
+
 
 .weekday {
     padding: 10px 0;
@@ -34,7 +42,8 @@
 .day {
     position: relative;
     padding-top: 100%;
-
+    outline: rgba(50, 54, 62, 0.835) solid 2px;
+    outline-width: 0.5px;
 }
 .day > .date{
     top:5px;
@@ -45,4 +54,16 @@
 #Edit-day {
     visibility: hidden;
     display: flex;
+}
+
+@media (max-width: 768px) {
+    /* Switches to Shorter day names (Monday -> M */
+    #calendar-weekdays .full-text {
+        display: none;
+    }
+    #calendar-weekdays .short-text {
+        display: inline;
+    }
+    
+
 }
