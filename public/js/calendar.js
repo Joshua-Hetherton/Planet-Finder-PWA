@@ -55,7 +55,7 @@ async function generateCalendar() {
     }
 
     //Filling calendar with days
-    for( day=1; day<=month_days; day++) {
+    for( let day=1; day<=month_days; day++) {
         const day_cell=document.createElement("div");
         day_cell.classList.add("day");
         day_cell.innerHTML=`<div class="date"> ${day}</div>`;
@@ -110,8 +110,10 @@ async function OpenEditor(day, month, year) {
     const Editor=document.getElementById("Editor");
     Editor.style.visibility="visible";
     Editor.classList.remove("hidden");
+    console.log("Chosen Date:", day);
 
-    const date=new Date(year, month, day);
+    const date=new Date(Date.UTC(year, month, day));
+    console.log("Clicked Date:",date);
 
     const format_date= date.toLocaleDateString("en-GB", {
         "weekday": "long",
@@ -119,7 +121,17 @@ async function OpenEditor(day, month, year) {
         "month": "long",
         "year": "numeric"
     });
-    
+
+    //Uses Geolocation API automatically, (no user input)(apart from them allowing access)
+    if( "geolocation" in navigator ) {
+        navigator.geolocation.getCurrentPosition( position => {
+            const latitude= position.coords.latitude;
+            const longitude= position.coords.longitude;
+
+            const planet_poisitions=getVisiblePlanets(latitude, longitude, date);
+            console.log(planet_poisitions);
+        });
+    }
 
 }
 
