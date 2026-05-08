@@ -50,10 +50,13 @@
     left:5px;
     position: absolute;
 }
+.hidden {
+    display: none;
+}
 
 #Edit-day {
+    display: hidden;
     visibility: hidden;
-    display: flex;
 }
 
 @media (max-width: 768px) {

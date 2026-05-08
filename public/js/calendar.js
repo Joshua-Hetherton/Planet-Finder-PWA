@@ -59,6 +59,13 @@ async function generateCalendar() {
         const day_cell=document.createElement("div");
         day_cell.classList.add("day");
         day_cell.innerHTML=`<div class="date"> ${day}</div>`;
+
+        //Adds event listener for when they click on the specific date
+        day_cell.addEventListener("click", () => {
+            OpenEditor(day, current_month, current_year);
+        })
+
+
         grid.appendChild(day_cell);
     }
 
@@ -96,6 +103,27 @@ document.getElementById("Today").addEventListener("click", () => {
     highlightCurrentDay();
 });
 
+generateCalendar();
+// Editor Section
+
+async function OpenEditor(day, month, year) {
+    Editor.style.visbility = "visible";
+    Editor.classList.remove("hidden");
+
+    const date=new Date(year, month, day);
+
+    const format_date= date.toLocaleDateString("en-GB", {
+        "weekday": "long",
+        "day": "numeric",
+        "month": "long",
+        "year": "numeric"
+    });
+    
+
+}
+
+
+
 document.getElementById("submit-information").addEventListener("click", () => {
 
 });
@@ -103,6 +131,3 @@ document.getElementById("submit-information").addEventListener("click", () => {
 document.getElementById("close-editor").addEventListener("click", () => {
 
 });
-
-generateCalendar();
-
