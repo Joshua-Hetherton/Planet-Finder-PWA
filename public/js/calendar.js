@@ -162,3 +162,11 @@ document.getElementById("close-editor").addEventListener("click", () => {
     Editor.style.visibility="hidden";
     Editor.classList.add("hidden");
 });
+
+//MongoDB Functions/Requests
+async function fetchMongoEntries() {
+    const response= await fetch("/api/entries");
+    const entries= await response.json();
+    console.log("Entries Retrieved:", entries);
+    return entries;
+}
