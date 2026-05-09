@@ -112,7 +112,7 @@ async function OpenEditor(day, month, year) {
     Editor.classList.remove("hidden");
     console.log("Chosen Date:", day);
     const time=new Date();
-    const date=new Date(Date.UTC(year, month, day, time.getHours(), time.getMinutes(), time.getSeconds()));
+    const date=new Date(year, month, day, time.getHours(), time.getMinutes(), time.getSeconds());
     console.log("Clicked Date:",date);
 
     const format_date= date.toLocaleDateString("en-GB", {
