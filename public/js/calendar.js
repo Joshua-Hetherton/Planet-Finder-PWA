@@ -153,7 +153,10 @@ async function OpenEditor(day, month, year) {
 
 
 document.getElementById("submit-information").addEventListener("click", () => {
-
+    const planet_selected=document.getElementById("planet-view-tags").value;
+    const equipment_used=document.getElementById("equipment-used").value;
+    const viewing_location=document.getElementById("viewing-location").value;
+    const user_notes=document.getElementById("user-notes").value;
 });
 
 document.getElementById("close-editor").addEventListener("click", () => {
