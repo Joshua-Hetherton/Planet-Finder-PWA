@@ -150,8 +150,6 @@ async function OpenEditor(day, month, year) {
 
 }
 
-
-
 document.getElementById("submit-information").addEventListener("click", () => {
     const planet_selected=document.getElementById("planet-view-tags").value;
     const equipment_used=document.getElementById("equipment-used").value;
