@@ -34,12 +34,12 @@ exports.updateEntry= async(req, res) => {
         if(!entry) {
             return res.status(404).json({error: "Entry not found"});
         }
-        user_id= req.body.user_id,
-        date= req.body.date,
-        planet_observed= req.body.planet_observed,
-        equipment_used= req.body.equipment_used,
-        viewing_location= req.body.viewing_location,
-        user_notes= req.body.user_notes
+        entry.user_id= req.body.user_id,
+        entry.date= req.body.date,
+        entry.planet_observed= req.body.planet_observed,
+        entry.equipment_used= req.body.equipment_used,
+        entry.viewing_location= req.body.viewing_location,
+        entry.user_notes= req.body.user_notes
         entry.save();
     })
     .then((savedEntry) => {
