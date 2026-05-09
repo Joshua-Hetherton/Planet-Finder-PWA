@@ -111,8 +111,8 @@ async function OpenEditor(day, month, year) {
     Editor.style.visibility="visible";
     Editor.classList.remove("hidden");
     console.log("Chosen Date:", day);
-
-    const date=new Date(Date.UTC(year, month, day));
+    const time=new Date();
+    const date=new Date(Date.UTC(year, month, day, time.getHours(), time.getMinutes(), time.getSeconds()));
     console.log("Clicked Date:",date);
 
     const format_date= date.toLocaleDateString("en-GB", {
@@ -128,8 +128,23 @@ async function OpenEditor(day, month, year) {
             const latitude= position.coords.latitude;
             const longitude= position.coords.longitude;
 
-            const planet_poisitions=getVisiblePlanets(latitude, longitude, date);
-            console.log(planet_poisitions);
+            const return_planets_visible=getVisiblePlanets(latitude, longitude, date);
+            const planets_visible=return_planets_visible.visible_planets.map (planet => {
+                //Converts to title case
+                planet.planet_name= planet.planet_name.charAt(0).toUpperCase() + planet.planet_name.slice(1);
+                return planet;
+            })
+            
+            console.log(planets_visible);
+
+            const planet=document.getElementById("planet-view-tags");
+            planet.innerHTML = "";
+            for (let i=0; i<planets_visible.length;i++) {
+                const planet_option=document.createElement("option");
+                planet_option.innerHTML=planets_visible[i].planet_name;
+                planet.appendChild(planet_option);
+            }
+
         });
     }
 
