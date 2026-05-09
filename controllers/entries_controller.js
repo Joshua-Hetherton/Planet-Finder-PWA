@@ -1,4 +1,4 @@
-const Day=require("../models/day");
+const Day=require("../models/entry");
 
 exports.getEntry= async(req, res) => {
     Day.find().then((entries) => {
@@ -40,13 +40,12 @@ exports.updateEntry= async(req, res) => {
         entry.equipment_used= req.body.equipment_used,
         entry.viewing_location= req.body.viewing_location,
         entry.user_notes= req.body.user_notes
-        entry.save();
-    })
-    .then((savedEntry) => {
+        entry.save().then((savedEntry) => {
         res.status(201).json(savedEntry);
     })
     .catch((error) => {
         res.status(500).json({error: "Error creating the entry"});
+    });
     });
     
 }

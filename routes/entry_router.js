@@ -10,3 +10,5 @@ router.get("/", entry_controller.getEntry);
 router.put("/:date", entry_controller.updateEntry);
 //Delete
 router.delete("/:date", entry_controller.deleteEntry);
+
+module.exports=router;
