@@ -167,12 +167,17 @@ async function OpenEditor(day, month, year,date_string) {
     //Fills data in if there is a record in MongoDB
     window.selectedDate=date_string;
     const entries=await fetchMongoEntries();
-    const entry_for_date=entries.find(entry => entry.date===date_string);
+    const entry_for_date=entries.find(entry => {
+        MongoDB_date=new Date(entry.date);
+        const entry_date_to_string= MongoDB_date.toISOString().split("T")[0];
+        return entry_date_to_string===date_string;
+
+    });
     if(entry_for_date) {
-        document.getElementById("planet-view-tags").value=entry_for_date.planet_observed;
-        document.getElementById("equipment-used").value=entry_for_date.equipment_used;
-        document.getElementById("viewing-location").value=entry_for_date.viewing_location;
-        document.getElementById("user-notes").value=entry_for_date.user_notes;
+        document.getElementById("planet-view-tags").value=entry_for_date.planet_observed || entry_for_date.planet_viewed || "";
+        document.getElementById("equipment-used").value=entry_for_date.equipment_used|| "";
+        document.getElementById("viewing-location").value=entry_for_date.viewing_location || "";
+        document.getElementById("user-notes").value=entry_for_date.user_notes|| "";
     }
     else {
         document.getElementById("planet-view-tags").value="";
