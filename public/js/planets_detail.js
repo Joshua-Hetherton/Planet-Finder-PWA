@@ -201,6 +201,13 @@ async function LoadPlanetData(lat, long) {
         await UniversalGridUpdate("Orbital-Information", { "Current Moon Phase": current_moon_phase, "Next 5 Lunar Eclipses": next_5_lunar_eclipse, ...cleaned_planet_data.cleaned_data});
         // await UniversalGridUpdate("Orbital-Information", next_5_lunar_eclipse);
         
+        //Adds func facts about the moon+ a random image
+        funfacts=["Footprints Never disappear on the moon, as the moon has no wind or atmosphere", "The Moon moves away from the earth every year by ~3.8cm!"];
+        const random_image = await GetRandomPlanetImage(planetName);
+                await UniversalGridUpdate("Fun-Facts", {"Nasa API Image": `<img src="${random_image.image}" style="width:100%; height:auto;">`,
+                "Caption": random_image.caption, "Facts": funfacts[Math.floor(Math.random() * funfacts.length)] }
+                );
+        
 
 
     }
