@@ -78,20 +78,20 @@ async function LoadPlanetData(lat, long) {
 
         // Reformats the data for easier viewing ond display page
         const rephrased_planet_position= {
-            "At Date: ": `${retrieved_date_time}`,
-            "Alitude: ": `${planet_position["altitude"].toFixed(2)} °`,
+            "At Date ": `${retrieved_date_time}`,
+            "Alitude ": `${planet_position["altitude"].toFixed(2)} °`,
             "Azimuth ": `${planet_position["azimuth"].toFixed(5)} °`,
-            "Current Visible: ": `${ planet_position["is_visible"] ? "yes" : "no" }`,
-            "Current AU Distance:": `${planet_position["AU_distance"].toFixed(2)} AU`,
+            "Current Visible ": `${ planet_position["is_visible"] ? "yes" : "no" }`,
+            "Current AU Distance ": `${planet_position["AU_distance"].toFixed(2)} AU`,
             
             };
 
         const rephrased_planet_Observable_time= {
             "At Date": `${retrieved_date_time}`,
-            "Rise Time: ": (ReformatDateTime(planet_observable_time["rise_time"]) ? planet_observable_time["rise_time"]: "N/A"),
-            "Set Time: ": (ReformatDateTime(planet_observable_time["set_time"]) ? planet_observable_time["set_time"]: "N/A"),
-            "Transit Time: ": (ReformatDateTime(planet_observable_time["transit_time"]) ? planet_observable_time["transit_time"] : "N/A"),
-            "Culmination Time: ": (ReformatDateTime(planet_observable_time["culmination_time"]) ?planet_observable_time[ "culmination_time"]: "N/A"),
+            "Rise Time ": (ReformatDateTime(planet_observable_time["rise_time"]) ? planet_observable_time["rise_time"]: "N/A"),
+            "Set Time ": (ReformatDateTime(planet_observable_time["set_time"]) ? planet_observable_time["set_time"]: "N/A"),
+            "Transit Time ": (ReformatDateTime(planet_observable_time["transit_time"]) ? planet_observable_time["transit_time"] : "N/A"),
+            "Culmination Time ": (ReformatDateTime(planet_observable_time["culmination_time"]) ?planet_observable_time[ "culmination_time"]: "N/A"),
         };
 
 
@@ -113,32 +113,41 @@ async function LoadPlanetData(lat, long) {
             console.log(cleaned_planet_data);
             await UniversalGridUpdate("Orbital-Information", cleaned_planet_data.cleaned_data);
 
-        
+        let funfacts=[];
+        //Facts are from https://science.nasa.gov/{planet}/facts/
         switch (planetName.toLowerCase()) {
             case "mercury":
-                await UniversalGridUpdate("Fun-Facts", {GetRandomPlanetImage: API_planet_data.nasa_images_data.collection.items[0].links[0].href});
+                funfacts=["Mercury has one of the most extreme Temperature swings in the solar system!", "Mercury is only 1 of 2 planets that doesn't have a moon!"];
                 break;
             case "venus":
-                await UniversalGridUpdate("Fun-Facts", {});
+                funfacts=["Venus is the hottest planet in the solar System (462 °C)!", "Venus is the only planet to rotate clockwise!"];
                 break;
             case "mars":
-                await UniversalGridUpdate("Fun-Facts", {});
+                funfacts=["Also Known as the Red Planet", "Mars has the largest volcano in the solar system, Olympus Mons!"];
                 break;
             case "jupiter":
-                await UniversalGridUpdate("Fun-Facts", {});
+                funfacts=["You can fit 1300 Earths inside Juipter!", "Jupiter has the shorted day of all the planets!"];
                 break;
             case "saturn":
-                await UniversalGridUpdate("Fun-Facts", {});
+                funfacts=["Saturn has the most mooons in the Solar System",
+                    "Saturn's rings are thought to be pieces of comets, asteroids, or shattered moons that broke up before they reached the planet, torn apart by Saturn's powerful gravity"];
                 break;
             case "uranus":
-                await UniversalGridUpdate("Fun-Facts", {});
+                funfacts=["Uranus has 28 known moons. While most of the satellites orbiting other planets take their names from Greek or Roman mythology, Uranus' moons are unique in being named for characters from the works of William Shakespeare and Alexander Pope.",
+                    "Uranus has two sets of rings. The inner system of nine rings consists mostly of narrow, dark grey rings. There are two outer rings: the innermost one is reddish like dusty rings elsewhere in the solar system, and the outer ring is blue like Saturn's E ring"];
                 break;
             case "neptune":
-                await UniversalGridUpdate("Fun-Facts", {});
+                funfacts=["Neptune has only completed 1 orbit around the sun since it was discovered in 1846!",
+                    "Neptune's largest moon, Triton, is one of the coldest places in the solar system, with temperatures around -235 degrees Celsius."];            
                 break;
             default:
                 console.log(`No additional information for ${planetName}`);
+                
         }
+        const random_image = await GetRandomPlanetImage(planetName);
+                await UniversalGridUpdate("Fun-Facts", {"Nasa API Image": `<img src="${random_image.image}" style="width:100%; height:auto;">`,
+                "Caption": random_image.caption, "Facts": funfacts[Math.floor(Math.random() * funfacts.length)] }
+                );
 
     }
     else {
@@ -163,20 +172,20 @@ async function LoadPlanetData(lat, long) {
 
         // Reformats the data for easier viewing ond display page
         const rephrased_planet_position= {
-            "At Date: ": `${retrieved_date_time}`,
-            "Alitude: ": `${planet_position["altitude"].toFixed(2)} °`,
+            "At Date ": `${retrieved_date_time}`,
+            "Alitude ": `${planet_position["altitude"].toFixed(2)} °`,
             "Azimuth ": `${planet_position["azimuth"].toFixed(5)} °`,
-            "Current Visible: ": `${ planet_position["is_visible"] ? "yes" : "no" }`,
-            "Current AU Distance:": `${planet_position["AU_distance"].toFixed(2)} AU`,
+            "Current Visible ": `${ planet_position["is_visible"] ? "yes" : "no" }`,
+            "Current AU Distance": `${planet_position["AU_distance"].toFixed(2)} AU`,
             
             };
 
         const rephrased_planet_Observable_time= {
             "At Date": `${retrieved_date_time}`,
-            "Rise Time: ": (ReformatDateTime(planet_observable_time["rise_time"]) ? planet_observable_time["rise_time"]: "N/A"),
-            "Set Time: ": (ReformatDateTime(planet_observable_time["set_time"]) ? planet_observable_time["set_time"]: "N/A"),
-            "Transit Time: ": (ReformatDateTime(planet_observable_time["transit_time"]) ? planet_observable_time["transit_time"] : "N/A"),
-            "Culmination Time: ": (ReformatDateTime(planet_observable_time["culmination_time"]) ?planet_observable_time[ "culmination_time"]: "N/A"),
+            "Rise Time ": (ReformatDateTime(planet_observable_time["rise_time"]) ? planet_observable_time["rise_time"]: "N/A"),
+            "Set Time ": (ReformatDateTime(planet_observable_time["set_time"]) ? planet_observable_time["set_time"]: "N/A"),
+            "Transit Time ": (ReformatDateTime(planet_observable_time["transit_time"]) ? planet_observable_time["transit_time"] : "N/A"),
+            "Culmination Time ": (ReformatDateTime(planet_observable_time["culmination_time"]) ?planet_observable_time[ "culmination_time"]: "N/A"),
         };
 
         const API_planet_data=await GetPlanetCharacteristics(planetName);
@@ -249,16 +258,22 @@ async function CleanPlanetCharacteristics(planet_Data) {
 }
 
 async function GetRandomPlanetImage(planetName) {
-    const response= await fetch(`/api/planet-info?planetName=${planetName}`).nasa_images_data.collection.items;
+    const response= await fetch(`/api/planet-info?planetName=${planetName}`)
+    const response_data= await response.json();
 
+    const nasa_images_data= response_data.nasa_images_data.collection.items;
     //Finds random image by selecting random index of array in collection images from nasa_images_data
-    const pick_random_image= response[Math.floor(Math.random() * response.length)].links[0].href
-    const random_image_response =await fetch(pick_random_image);
-    const random_image= await random_image_response.json();
+    const pick_random_image= nasa_images_data[Math.floor(Math.random() * nasa_images_data.length)];
 
-    return random_image;
+    const manifestURL= pick_random_image.href;
+    const mainfest_response= await fetch(manifestURL);
+    const manifest_data= await mainfest_response.json();
 
+    const image_links=manifest_data.filter(url => url.endsWith(".jpg") || url.endsWith(".png"));
+    console.log(image_links);
+    const caption=pick_random_image.data[0].title
 
-
-
+    return { 
+        image: image_links[0], 
+        caption: caption};
 }
