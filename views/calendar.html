@@ -55,7 +55,7 @@
             <div class="Edit-container">
                 <h3 id="date-Editor"></h3>
 
-                <p> Visible Planets</p>
+                <p> Add to Calendar</p>
                 <label>Planets Viewed</label>
                 <select id="planet-view-tags">
                     <!-- Dynamic via JavaScript
@@ -73,10 +73,12 @@
                 <label> Notes</label>
                 <textarea id="user-notes" placeholder="Additional Notes"></textarea>
                 <!-- Editor Buttons -->
-                <button id="submit-information">Submit</button>
-                <button id="delete-entry">Delete Entry</button>
-                <button id="update-entry">Update Entry</button>
-                <button id="close-editor">Close</button>
+                <div class="editor-buttons">
+                    <button class="editor-button" id="submit-information">Submit</button>
+                    <button class="editor-button" id="update-entry">Update Entry</button>
+                    <button class="editor-button" id="delete-entry">Delete Entry</button>
+                    <button class="editor-button" id="close-editor">Close</button>
+                </div> 
             </div>
 
 

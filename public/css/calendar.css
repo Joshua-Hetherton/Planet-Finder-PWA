@@ -79,9 +79,58 @@
     width:90%;
     max-width: 450px;
 
-    display:flex;
+    display: flex;
     flex-direction: column;
     gap:10px;
+}
+
+.Edit-container p {
+    font-size: 36px;
+    align-self: center;
+    color: rgb(220, 220, 230);
+}
+
+#planet-view-tags, #equipment-used, #viewing-location, #user-notes {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(36, 36, 44);
+    color: rgb(220, 220, 230);
+}
+
+
+.editor-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap:10px;
+    margin: 10px;
+    width: 100%;
+}
+
+
+.editor-button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 150px;
+    background-color: rgb(36, 36, 44);
+    color: rgb(220, 220, 230);
+
+}
+
+.editor-button:hover{
+    background-color: rgb(85, 100, 145);
+    cursor: pointer;
+}
+.editor-button:active{
+    background-color: rgb(60, 70, 105);
+    transform: scale(0.98);
+
+}
+#delete-entry {
+    background-color: rgb(125, 44, 44);
 }
 
 @media (max-width: 768px) {
