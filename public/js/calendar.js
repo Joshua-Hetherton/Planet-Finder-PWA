@@ -178,12 +178,21 @@ async function OpenEditor(day, month, year,date_string) {
         document.getElementById("equipment-used").value=entry_for_date.equipment_used|| "";
         document.getElementById("viewing-location").value=entry_for_date.viewing_location || "";
         document.getElementById("user-notes").value=entry_for_date.user_notes|| "";
+        //Making Buttons dependent on the record existing or not
+        document.getElementById("submit-information").style.display="none";
+        document.getElementById("update-entry").style.display="inline-block";
+        document.getElementById("delete-entry").style.display="inline-block";
     }
     else {
         document.getElementById("planet-view-tags").value="";
         document.getElementById("equipment-used").value="";
         document.getElementById("viewing-location").value="";
         document.getElementById("user-notes").value="";
+
+        //Making Buttons dependent on the record existing or not
+        document.getElementById("submit-information").style.display="inline-block";
+        document.getElementById("update-entry").style.display="none";
+        document.getElementById("delete-entry").style.display="none";
     }
 
 }
