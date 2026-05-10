@@ -60,14 +60,30 @@ async function generateCalendar() {
         day_cell.classList.add("day");
         day_cell.innerHTML=`<div class="date"> ${day}</div>`;
 
+        //uses padding to get the correct format (DDMMYYYY)
+        const convertdate_to_string= `${current_year}-${String(current_month +1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+        day_cell.setAttribute("data-date", convertdate_to_string);
+
         //Adds event listener for when they click on the specific date
         day_cell.addEventListener("click", () => {
-            OpenEditor(day, current_month, current_year);
+            OpenEditor(day, current_month, current_year, convertdate_to_string);
         })
 
 
         grid.appendChild(day_cell);
     }
+
+
+    //Finding any Filled entries given by user(id 1 by default)
+    const entries=await fetchMongoEntries();
+    entries.forEach(entry => {
+        const entry_retrieved_date= entry.date
+        const given_date=document.querySelector(`[data-date="${entry_retrieved_date}"]`)
+        if(given_date) {
+            given_date.classList.add("existing-entry");
+
+        }    
+    });
 
     updateCalendarMonthTitle();
     highlightCurrentDay();
@@ -106,7 +122,7 @@ document.getElementById("Today").addEventListener("click", () => {
 generateCalendar();
 // Editor Section
 
-async function OpenEditor(day, month, year) {
+async function OpenEditor(day, month, year,date_string) {
     const Editor=document.getElementById("Editor");
     Editor.style.visibility="visible";
     Editor.classList.remove("hidden");
@@ -148,19 +164,46 @@ async function OpenEditor(day, month, year) {
         });
     }
 
-}
+    //Fills data in if there is a record in MongoDB
+    window.selectedDate=date_string;
+    const entries=await fetchMongoEntries();
+    const entry_for_date=entries.find(entry => entry.date===date_string);
+    if(entry_for_date) {
+        document.getElementById("planet-view-tags").value=entry_for_date.planet_observed;
+        document.getElementById("equipment-used").value=entry_for_date.equipment_used;
+        document.getElementById("viewing-location").value=entry_for_date.viewing_location;
+        document.getElementById("user-notes").value=entry_for_date.user_notes;
+    }
+    else {
+        document.getElementById("planet-view-tags").value="";
+        document.getElementById("equipment-used").value="";
+        document.getElementById("viewing-location").value="";
+        document.getElementById("user-notes").value="";
+    }
 
+}
+//Addds to MongoDB when submitting information
 document.getElementById("submit-information").addEventListener("click", () => {
     const planet_selected=document.getElementById("planet-view-tags").value;
     const equipment_used=document.getElementById("equipment-used").value;
     const viewing_location=document.getElementById("viewing-location").value;
     const user_notes=document.getElementById("user-notes").value;
+
+    createNewEntry();
 });
 
 document.getElementById("close-editor").addEventListener("click", () => {
     const Editor=document.getElementById("Editor");
     Editor.style.visibility="hidden";
     Editor.classList.add("hidden");
+});
+
+document.getElementById("delete-entry").addEventListener("click", () => {
+    deleteEntry(window.selectedDate);
+});
+
+document.getElementById("update-entry").addEventListener("click", () => {
+    updateEntry(window.selectedDate);
 });
 
 //MongoDB Functions/Requests
@@ -170,3 +213,49 @@ async function fetchMongoEntries() {
     console.log("Entries Retrieved:", entries);
     return entries;
 }
+
+async function createNewEntry() {
+    const entry_body= {
+        user_id: "1",
+        date: window.selectedDate,
+        planet_observed: document.getElementById("planet-view-tags").value,
+        equipment_used: document.getElementById("equipment-used").value,
+        viewing_location: document.getElementById("viewing-location").value,
+        user_notes: document.getElementById("user-notes").value
+    };
+    await fetch("/api/entries", {
+        method:"POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(entry_body)
+    });
+    location.reload();
+}
+
+async function updateEntry(entry_id) {
+    const entry_body= {
+        user_id: "1",
+        date: window.selectedDate,
+        planet_observed: document.getElementById("planet-view-tags").value,
+        equipment_used: document.getElementById("equipment-used").value,
+        viewing_location: document.getElementById("viewing-location").value,
+        user_notes: document.getElementById("user-notes").value
+    };
+    await fetch(`/api/entries/${entry_id}`, {
+        method:"PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(entry_body)
+    });
+    location.reload();
+}
+
+async function deleteEntry(entry_id) {
+    await fetch(`/api/entries/${entry_id}`, {
+        method:"DELETE"
+    });
+    location.reload();
+}
+//
