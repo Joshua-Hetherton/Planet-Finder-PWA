@@ -12,8 +12,19 @@
     max-width: 100%;
     overflow-x: hidden;
 }
-
-
+#Previous-Month, #Next-Month, #Today {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 150px;
+    background-color: rgb(36, 36, 44);
+    color: rgb(220, 220, 230);
+    margin: 5px;
+}
+#Previous-Month:hover, #Next-Month:hover, #Today:hover {
+    background-color: rgb(85, 100, 145);
+    cursor: pointer;
+}
 #calendar-weekdays {
     display:grid;
     grid-template-columns: repeat(7, 1fr);
