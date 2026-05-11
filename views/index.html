@@ -108,6 +108,13 @@
             
         </div>
     <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function () {
+                navigator.serviceWorker.register("/sw.js");
+            })
+        }
+    </script>
+    <script>
         document.getElementById("nav-planet-dropdown").addEventListener("change", function () {
             if (this.value) {
                 window.location.href = this.value;

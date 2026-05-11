@@ -13,6 +13,7 @@ app.use(morgan("tiny"));
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")))
+app.use(express.static(path.join(__dirname, "views")))
 
 const home_router=require("./routes/home_router");
 const planet_router=require("./routes/planet_router");
