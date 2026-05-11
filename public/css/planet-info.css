@@ -149,8 +149,6 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 
 
     }
-}
-@media (min-width: 600px) {
     #Fun-Facts {
         grid-template-columns: repeat(2, 1fr);
     }
