@@ -36,6 +36,24 @@ h1, h2, h3 {
     border-radius: 5px;
     transition: background-colour 0.3s;
 }
+.nav-planet-dropdwon {
+    background-color: rgba(15, 15, 18, 0.902);;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
+    color: white;
+    border:none;
+    outline:none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    
+
+}
+.nav-planet-dropdwon option {
+    color: white;
+    background-color: rgba(15, 15, 18, 0.902);
+}
+.navigation-bar a:hover, .nav-planet-dropdwon:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
 .button-images {
     display: flex;

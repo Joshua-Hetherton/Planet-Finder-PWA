@@ -16,7 +16,18 @@
         <!-- Navigation Layout -->
         <div class="navigation-bar">
             <a href="/">Home</a>
-            <a href="/planet-info">Planets</a>
+            <select class="nav-planet-dropdwon" id="nav-planet-dropdown">
+                <option value="" disabled selected>Planets</option>
+                <option value="/planet/mercury">Mercury</option>
+                <option value="/planet/venus">Venus</option>
+                <option value="/planet/moon">Moon</option>
+                <option value="/planet/mars">Mars</option>
+                <option value="/planet/jupiter">Jupiter</option>
+                <option value="/planet/saturn">Saturn</option>
+                <option value="/planet/uranus">Uranus</option>
+                <option value="/planet/neptune">Neptune</option>
+
+            </select>
             <a href="/calendar">Viewing Calendar</a>
         </div>
         <div class="button-images">
@@ -96,5 +107,12 @@
             
             
         </div>
+    <script>
+        document.getElementById("nav-planet-dropdown").addEventListener("change", function () {
+            if (this.value) {
+                window.location.href = this.value;
+            }
+        })
+    </script>
     </body>
 </html>
