@@ -31,41 +31,35 @@ self.addEventListener('install', (e) => {
     );
 });
 
+
 // FETCH: Serve from cache first, then try the network
 self.addEventListener('fetch', (e) => {
     const url_path = new URL(e.request.url);
+
+
+    if (e.request.mode === "navigate") {
+        e.respondWith(
+        caches.match(e.request).then((cached) => {
+            if (cached) return cached;
+
+            return fetch(e.request)
+                .then((networkResponse) => {
+                    return caches.open(cacheName).then((cache) => {
+                        cache.put(e.request, networkResponse.clone());
+                        return networkResponse;
+                    });
+                })
+                .catch(() => caches.match("/planet-info.html"));
+            })
+        );
+        return;
+    }
+
+
     //MongoDB+Nasa API Backend Requests
-    if (url_path.pathname.startsWith("/api/planet-info")) {
-        e.respondWith(
-            fetch(e.request)
-            .then((response) => {
-                const clone = response.clone();
-                caches.open(cacheName).then((cache) => {
-                    cache.put(e.request, clone);
-                });
-                return response;
-            }).catch(() => caches.match(e.request))
-        );
-        return;
-    }
-
     //Le Systeme Solaire API
-    if(url_path.pathname.startsWith("/api/solarsystem")) {
-        e.respondWith(
-            fetch(e.request)
-            .then((response) => {
-                const clone = response.clone();
-                caches.open(cacheName).then((cache) => {
-                    cache.put(e.request, clone);
-                });
-                return response;
-            }).catch(() => caches.match(e.request))
-        );
-        return;
-    }
-
     //NASA images
-    if(url_path.pathname.startsWith("/api/nasa-images")) {
+    if (url_path.pathname.startsWith("/api/planet-info")||url_path.pathname.startsWith("/api/solarsystem")||url_path.pathname.startsWith("/api/nasa-images")) {
         e.respondWith(
             fetch(e.request)
             .then((response) => {
