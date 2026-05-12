@@ -195,7 +195,7 @@ async function LoadPlanetData(lat, long) {
         await UniversalGridUpdate("Rise-And-Set", rephrased_planet_Observable_time);
         // Adds the next moon phase and lunar eclipses with the cleaned_planet_date from le solaire
 
-        await UniversalGridUpdate("Orbital-Information", { "Current Moon Phase": current_moon_phase, "Next 5 Lunar Eclipses": next_5_lunar_eclipse, ...cleaned_planet_data.cleaned_data});
+        await UniversalGridUpdate("Orbital-Information", { "Current Moon Phase": current_moon_phase, "Next 5 Lunar Eclipses": next_5_lunar_eclipse.eclipses, ...cleaned_planet_data.cleaned_data});
         // await UniversalGridUpdate("Orbital-Information", next_5_lunar_eclipse);
         
         //Adds func facts about the moon+ a random image

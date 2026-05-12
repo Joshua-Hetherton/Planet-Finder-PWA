@@ -102,15 +102,16 @@ function getVisiblePlanets(latitude, longitude, date) {
 
 function moonPhase(date) {
     const moon_phase_number= Astronomy.MoonPhase(date);
-    switch (moon_phase_number)
-    {
-        case moon_phase_number<45 || moon_phase_number>=310:
-            return "New Moon";
-        case  moon_phase_number>=45 && moon_phase_number<135:
-            return"First Quarter";
-        case  moon_phase_number>=135 && moon_phase_number<225:
-            return"Full Moon";
-
+    if (moon_phase_number<45 || moon_phase_number>=315) {
+        return "New Moon";
+    }
+    else if (moon_phase_number>=45 && moon_phase_number<135) {
+        return "First Quarter";
+    }
+    else if (moon_phase_number >=315 && moon_phase_number<225){
+        return "Full Moon";
+    }
+    else{
         return "Third Quarter";
     }
 }
@@ -119,12 +120,15 @@ function moonPhase(date) {
 Finds the next 5 lunar eclipses from a given date
 */
 function findNextEclipse(date) {
-    eclipses=[];
+    let eclipses=[];
     let eclipse= Astronomy.SearchLunarEclipse(date);
     for (let i=0; i<5; i++) {
-        eclipses.push({date: eclipse.peak.date.toISOString(), type: eclipse.kind});
+        eclipses.push(`<li> <span>Peak:${eclipse.peak.toString()}</span><br>
+                    <span>Type: ${eclipse.kind}</span> 
+                    <span>Obscuration: ${eclipse.obscuration.toFixed(2)}</span> </li>`);
         eclipse= Astronomy.NextLunarEclipse(eclipse.peak);
     }
+    eclipses.
     //Add type of eclipse on eclipses
     return { eclipses};
 }
