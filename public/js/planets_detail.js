@@ -90,13 +90,14 @@ async function LoadPlanetData(lat, long) {
             "At Date": `${retrieved_date_time}`,
             "Rise Time ": (ReformatDateTime(planet_observable_time["rise_time"]) ? planet_observable_time["rise_time"]: "N/A"),
             "Set Time ": (ReformatDateTime(planet_observable_time["set_time"]) ? planet_observable_time["set_time"]: "N/A"),
-            "Transit Time ": (ReformatDateTime(planet_observable_time["transit_time"]) ? planet_observable_time["transit_time"] : "N/A"),
-            "Culmination Time ": (ReformatDateTime(planet_observable_time["culmination_time"]) ?planet_observable_time[ "culmination_time"]: "N/A"),
+            "Transit Time ": (ReformatDateTime(planet_observable_time["transit_time"]) ? planet_observable_time["transit_time"].time.date: "N/A"),
+            "Culmination Time ": (ReformatDateTime(planet_observable_time["culmination_time"]) ? planet_observable_time["culmination_time"].time.date: "N/A")
         };
+        console.log(rephrased_planet_Observable_time);
 
 
 
-
+        console.log("FINAL OBJECT:", rephrased_planet_Observable_time);
         await UniversalGridUpdate("PlanetOrbit", rephrased_planet_position);
         await UniversalGridUpdate("Rise-And-Set", rephrased_planet_Observable_time);
         /*Todo Universal Grid Update for Fun Facts. Possibly use a Nasa API for fun facts about a selected planet
@@ -152,17 +153,13 @@ async function LoadPlanetData(lat, long) {
     }
     else {
         console.log("Loading planet data for: moon");
-        const moon_position= getPlanetPosition(retrieved_latitude,retrieved_longitude, retrieved_date_time, planetName);
-        console.log(moon_position);
-
-        const moon_observable_time= getPlanetObservableTime(retrieved_latitude, retrieved_longitude, retrieved_date_time, planetName);
-        console.log(moon_observable_time);
-
+        //Moon specific data
         const current_moon_phase= moonPhase(retrieved_date_time);
         console.log("Current Moon Phase:", current_moon_phase);
 
         const next_5_lunar_eclipse= findNextEclipse(retrieved_date_time);
         console.log("Next 5 Lunar Eclipses:", next_5_lunar_eclipse);
+        //
 
         const planet_position=getPlanetPosition(retrieved_latitude, retrieved_longitude, retrieved_date_time,planetName);
         console.log(planet_position);
@@ -184,8 +181,8 @@ async function LoadPlanetData(lat, long) {
             "At Date": `${retrieved_date_time}`,
             "Rise Time ": (ReformatDateTime(planet_observable_time["rise_time"]) ? planet_observable_time["rise_time"]: "N/A"),
             "Set Time ": (ReformatDateTime(planet_observable_time["set_time"]) ? planet_observable_time["set_time"]: "N/A"),
-            "Transit Time ": (ReformatDateTime(planet_observable_time["transit_time"]) ? planet_observable_time["transit_time"] : "N/A"),
-            "Culmination Time ": (ReformatDateTime(planet_observable_time["culmination_time"]) ?planet_observable_time[ "culmination_time"]: "N/A"),
+            "Transit Time ": (ReformatDateTime(planet_observable_time["transit_time"]) ? planet_observable_time["transit_time"].time.date: "N/A"),
+            "Culmination Time ": (ReformatDateTime(planet_observable_time["culmination_time"]) ? planet_observable_time["culmination_time"].time.date: "N/A")
         };
 
         const API_planet_data=await GetPlanetCharacteristics(planetName);
@@ -227,7 +224,7 @@ async function UniversalGridUpdate(id, data) {
 
 }
 
-async function ReformatDateTime(date_time) {
+function ReformatDateTime(date_time) {
     const date= new Date(date_time);
     const new_date={year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit"};
 
