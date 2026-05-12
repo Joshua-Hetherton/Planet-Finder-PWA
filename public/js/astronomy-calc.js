@@ -28,7 +28,7 @@ function getPlanetPosition(latitude, longitude, date, planet_name) {
     const position_Vecotr= Astronomy.GeoVector(body, date, true);
 
     //Calculates distance in KM then coverts to AU (Astronomical Units)
-    const current_position=Math.sqrt(position_Vecotr.x**2 + position_Vecotr.y**2 + position_Vecotr.z**2)*Astronomy.KM_PER_AU;
+    const current_position=Math.sqrt(position_Vecotr.x**2 + position_Vecotr.y**2 + position_Vecotr.z**2);
 
 
     return {

@@ -1,3 +1,6 @@
+body{
+    overflow-x: hidden;
+}
 .calendar-container {
     gap: 20px;
     background-color: rgba(28, 28, 34, 0.8);
