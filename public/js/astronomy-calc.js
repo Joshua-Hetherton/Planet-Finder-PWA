@@ -128,7 +128,6 @@ function findNextEclipse(date) {
                     <span>Obscuration: ${eclipse.obscuration.toFixed(2)}</span> </li>`);
         eclipse= Astronomy.NextLunarEclipse(eclipse.peak);
     }
-    eclipses.
     //Add type of eclipse on eclipses
     return { eclipses};
 }
