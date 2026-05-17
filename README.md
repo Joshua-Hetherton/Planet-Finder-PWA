@@ -9,7 +9,7 @@ Table of Contents
 
 Overview
 -------------
-
+Planet Finder is a Progressive Web App (PWA) that allows users to learn and explore the planets in the solar system. The app provides detailed characteristics about each planet, as well as the relevant information to view the planet. To do this, users can input their desired date, time and location, and the app will show all available information. The app also has a calendar feature to allow users to log which planet they may have seen, as well as any additional notes. This PWA can work both offline and online, so users can still view important information at any location.
 
 Prerequisites
 -------------
