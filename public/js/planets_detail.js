@@ -88,8 +88,8 @@ async function LoadPlanetData(lat, long) {
 
         const rephrased_planet_Observable_time= {
             "At Date": `${retrieved_date_time}`,
-            "Rise Time ": (ReformatDateTime(planet_observable_time["rise_time"]) ? planet_observable_time["rise_time"]: "N/A"),
-            "Set Time ": (ReformatDateTime(planet_observable_time["set_time"]) ? planet_observable_time["set_time"]: "N/A"),
+            "Rise Time ": (ReformatDateTime(planet_observable_time["rise_time"].date)),
+            "Set Time ": (ReformatDateTime(planet_observable_time["set_time"].date)),
             "Transit Time ": (ReformatDateTime(planet_observable_time["transit_time"]) ? planet_observable_time["transit_time"].time.date: "N/A"),
             "Culmination Time ": (ReformatDateTime(planet_observable_time["culmination_time"]) ? planet_observable_time["culmination_time"].time.date: "N/A")
         };

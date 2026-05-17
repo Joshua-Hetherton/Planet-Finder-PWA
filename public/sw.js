@@ -59,7 +59,7 @@ self.addEventListener('fetch', (e) => {
     //MongoDB+Nasa API Backend Requests
     //Le Systeme Solaire API
     //NASA images
-    if (url_path.pathname.startsWith("/api/planet-info")||url_path.pathname.startsWith("/api/solarsystem")||url_path.pathname.startsWith("/api/nasa-images")) {
+    if (url_path.pathname.startsWith("/api/planet-info")||url_path.pathname.startsWith("/api/solarsystem")||url_path.pathname.startsWith("/api/nasa-images")||url_path.pathname.startsWith("/api/entries")) {
         e.respondWith(
             fetch(e.request)
             .then((response) => {
